@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+# References:
+- (Angular + pasport)https://www.youtube.com/watch?v=IlpU1z3cvSQ
+- (passport + express)https://www.youtube.com/watch?v=CHodPpqLqG8&index=2&list=PL4cUxeGkcC9jdm7QX143aMLAqyM-jTZ2x
+- (passportjs) http://www.passportjs.org/
+- (MEAN + Angular6) https://auth0.com/blog/real-world-angular-series-part-1/
+- (passportjs + github login) https://www.jokecamp.com/tutorial-passportjs-authentication-in-nodejs/

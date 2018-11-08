@@ -1,13 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Sort} from '@angular/material';
 
-export interface Ingredient {
-    calories: number;
-    carbs: number;
-    fat: number;
-    name: string;
-    protein: number;
-}
+import {Ingredient} from '../../model/ingredient';
 
 @Component({
     selector: 'app-add-recipe-ingredients',

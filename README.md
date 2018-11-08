@@ -32,3 +32,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - (passportjs) http://www.passportjs.org/
 - (MEAN + Angular6) https://auth0.com/blog/real-world-angular-series-part-1/
 - (passportjs + github login) https://www.jokecamp.com/tutorial-passportjs-authentication-in-nodejs/
+- (Angular + PWA) https://vitalflux.com/angular-6-create-pwa-progressing-web-app/

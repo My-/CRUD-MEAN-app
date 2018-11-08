@@ -1,3 +1,33 @@
-<p>
-  user-login works!
-</p>
+<div class="component">
+    <p>user-login</p>
+
+    <form [formGroup]="loginForm">
+        <mat-form-field >
+            <input formControlName="email" matInput placeholder="User name" type="text">
+        </mat-form-field>
+
+        <div class="row">
+            <mat-form-field>
+                <input formControlName="password" matInput placeholder="Password" pw-show-hide="tacos" type="password">
+            </mat-form-field>
+            <button mat-stroked-button color="primary">show</button>
+        </div>
+
+
+        <!--Buttons-->
+        <div class="button-row">
+            <button mat-stroked-button color="primary" (click)="goToRgister()">Register</button>
+            <button mat-stroked-button color="primary" (click)="login()">Login</button>
+        </div>
+
+        <!--OAuth-->
+        <div class="button-row">
+            <button mat-stroked-button color="primary" >GitHub</button>
+            <button mat-stroked-button color="primary" >Facebook</button>
+            <button mat-stroked-button color="primary" >Twitter</button>
+            <button mat-stroked-button color="primary" >Google</button>
+        </div>
+
+    </form>
+</div>
+

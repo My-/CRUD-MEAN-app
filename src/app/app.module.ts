@@ -12,6 +12,8 @@ import {UserRegisterComponent} from './components/user-register/user-register.co
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {LoginService} from './services/login.service';
+import {RecipeService} from './services/recipe.service';
 import { MaterialModule } from './material.module';
 
 @NgModule({
@@ -33,6 +35,7 @@ import { MaterialModule } from './material.module';
         MaterialModule,
     ],
     providers: [],
+    providers: [LoginService, RecipeService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

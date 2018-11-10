@@ -1,8 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource} from '@angular/material';
-import {Ingredient} from '../../model/ingredient';
 import {NgForm} from '@angular/forms';
-import {Recipe} from '../../model/recipe';
+import {FormControl} from '@angular/forms';
+
+import {Ingredient, INGREDIENTS} from '../../model/ingredient';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
     selector: 'app-add-recipe-ingredients',
@@ -25,9 +28,23 @@ export class AddRecipeIngredientsComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
 
     sortedData: Ingredient[];
+    filteredIngredients: Observable<Ingredient[]>;
+    ingredientsCtrl = new FormControl();
 
     constructor() {
         this.sortedData = this.ingredients.slice();
+
+        this.filteredIngredients = this.ingredientsCtrl.valueChanges
+            .pipe(
+                startWith(''),
+                map(state => state ? this._filterIngredients(state) : INGREDIENTS.slice())
+            );
+    }
+
+    private _filterIngredients(value: string): State[] {
+        const filterValue = value.toLowerCase();
+
+        return INGREDIENTS.filter(ingredient => ingredient.name.toLowerCase().indexOf(filterValue) === 0);
     }
 
     ngOnInit() {
@@ -49,5 +66,4 @@ export class AddRecipeIngredientsComponent implements OnInit {
 
         form.resetForm();
     }
-
 }

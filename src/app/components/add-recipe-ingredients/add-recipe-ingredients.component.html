@@ -6,6 +6,7 @@
     <!--Input-->
     <form (submit)="onAddIngredient(postForm)" #postForm="ngForm">
         <table class="example-full-width" cellspacing="0"><tr>
+
             <td><mat-form-field class="example-full-width">
                 <input matInput
                        placeholder="Ingredient"
@@ -13,8 +14,16 @@
                        name="ingredient"
                        ngModel
                        required
-                       #ingredient="ngModel">
+                       #ingredient="ngModel"
+                       [matAutocomplete]="auto">
+                       <!--[formControl]="ingredientsCtrl">-->  <!-- TODO: fix it -->
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient.name">
+                        <span>{{ingredient.name}}</span>
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field></td>
+
             <td><mat-form-field class="example-full-width">
                 <input matInput
                        placeholder="Amount (grams)"

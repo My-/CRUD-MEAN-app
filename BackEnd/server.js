@@ -3,6 +3,10 @@
 const express = require('express')
 const app = express()
 
+// body parser should be used before routes
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
+
 const cors = require('cors')
 app.use(cors({
     origin:['http://localhost:4200','http://127.0.0.1:4200'],
@@ -21,12 +25,13 @@ const passportSetup = require('./config/passport-setup')
 //     next();
 // });
 
-// import routes from auth-routs.js file
+// authenticate routes
 const authRoutes = require('./routes/auth-routs')
-// use routes from auth-routs.js file
 app.use('/auth', authRoutes)
 
-
+// recipe routes
+const recipeRoutes = require('./routes/recipe-routs')
+app.use('/recipe', recipeRoutes)
 
 
 

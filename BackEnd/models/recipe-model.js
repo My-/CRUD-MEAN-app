@@ -1,5 +1,3 @@
-import { Ingredient } from "../../src/app/model/ingredient"
-
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const keys = require('../../.keys/keys')
@@ -16,7 +14,10 @@ const recipeSchema = new Schema({
     allergies: [{allergy: String}],
     takesTime: Number,
     pictures: [{uri: String}],
-    ingredients: [{ingredient: Object}],    // Ingredient object
+    ingredients: [{
+        name: String,
+        amount: Number
+    }],    // Ingredient object
     recipe: String,
     created: { type: Date, default: Date.now },
 })

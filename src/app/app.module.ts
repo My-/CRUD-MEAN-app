@@ -13,7 +13,9 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginService} from './services/login.service';
+import {HttpClientModule} from '@angular/common/http';
 import {RecipeService} from './services/recipe.service';
+
 import { MaterialModule } from './material.module';
 
 @NgModule({
@@ -24,17 +26,17 @@ import { MaterialModule } from './material.module';
         AddRecipeIngredientsComponent,
         UserLoginComponent,
         UserRegisterComponent,
-        UserProfileComponent
+        UserProfileComponent,
     ],
     imports: [
+        HttpClientModule,
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
         MaterialModule,
     ],
-    providers: [],
     providers: [LoginService, RecipeService],
     bootstrap: [AppComponent]
 })

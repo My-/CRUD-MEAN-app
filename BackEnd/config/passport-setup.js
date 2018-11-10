@@ -4,7 +4,7 @@ const passport = require('passport')
 const GithubStrategy = require('passport-github').Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 
-const User = require('../models/user-models')
+const User = require('../models/user-model')
 
 
 passport.use(

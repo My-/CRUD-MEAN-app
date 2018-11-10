@@ -8,9 +8,9 @@
 
         <div class="row">
             <mat-form-field>
-                <input formControlName="password" matInput placeholder="Password" pw-show-hide="tacos" type="password">
+                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </mat-form-field>
-            <button mat-stroked-button color="primary">show</button>
         </div>
 
 
@@ -18,14 +18,15 @@
         <div class="button-row">
             <button mat-stroked-button color="primary" (click)="goToRgister()">Register</button>
             <button mat-stroked-button color="primary" (click)="login()">Login</button>
+            <button mat-stroked-button color="primary" (click)="logout()">Logout</button>
         </div>
 
         <!--OAuth-->
         <div class="button-row">
-            <button mat-stroked-button color="primary" >GitHub</button>
-            <button mat-stroked-button color="primary" >Facebook</button>
-            <button mat-stroked-button color="primary" >Twitter</button>
-            <button mat-stroked-button color="primary" >Google</button>
+            <button mat-stroked-button color="primary" (click)="loginGitHub()">GitHub</button>
+            <button mat-stroked-button color="primary" (click)="login()">Facebook</button>
+            <button mat-stroked-button color="primary" (click)="login()">Twitter</button>
+            <button mat-stroked-button color="primary" (click)="loginGoogle()">Google</button>
         </div>
 
     </form>

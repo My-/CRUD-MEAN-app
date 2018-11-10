@@ -34,6 +34,7 @@ export class AddRecipeIngredientsComponent implements OnInit {
     constructor() {
         this.sortedData = this.ingredients.slice();
 
+        // Auto complete
         this.filteredIngredients = this.ingredientsCtrl.valueChanges
             .pipe(
                 startWith(''),
@@ -41,7 +42,7 @@ export class AddRecipeIngredientsComponent implements OnInit {
             );
     }
 
-    private _filterIngredients(value: string): State[] {
+    private _filterIngredients(value: string): Ingredient[] {
         const filterValue = value.toLowerCase();
 
         return INGREDIENTS.filter(ingredient => ingredient.name.toLowerCase().indexOf(filterValue) === 0);

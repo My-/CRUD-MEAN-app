@@ -38,7 +38,9 @@ export class AddRecipeComponent implements OnInit {
             recipe: form.value.recipe,
         };
 
-        this._recipeDB.add(userRecipe).subscribe(res => console.log(res));
+        this._recipeDB.add(userRecipe)
+            .subscribe(res => console.log(`
+            got back: ${JSON.stringify(res, null, 4)}`));
 
         form.resetForm();
     }

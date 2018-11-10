@@ -24,7 +24,8 @@ passport.use(
             loginId: profile.id,
             avatar: profile.photos[0].value,
             profile: profile,
-        }).save().then((newUser) => { console.log(`Created user: ${newUser}`)})
+        }).save().then((newUser) => { console.log(`
+        Created user: ${newUser}`)})
         // return done(null, profile)
     })
 )
@@ -43,7 +44,8 @@ passport.use(
             avatar: profile.photos[0].value,
             profile: profile,
         }).save()
-            .then((newUser) => console.log(`Created user: ${newUser}`) )
+            .then((newUser) => console.log(`
+            Created user: ${newUser}`) )
         // return done(null, profile)
     })
 )

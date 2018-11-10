@@ -25,7 +25,8 @@ router.get('/google', passport.authenticate('google', {
 
 // google call back URI
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.send("<pre>" + JSON.stringify(req.user, null, 4) + "</pre>")
+    console.log(JSON.stringify(req.user, null, 4))
+    // res.send("<pre>" + JSON.stringify(req.user, null, 4) + "</pre>")
 })
 
 /* GITHUB */

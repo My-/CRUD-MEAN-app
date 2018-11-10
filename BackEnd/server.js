@@ -16,14 +16,15 @@ app.use(cors({
 // const passport = require('passport')
 const passportSetup = require('./config/passport-setup')
 
+  
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS')
+    next();
+});
 
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers",
-//         "Origin, X-Requested-With, Content-Type, Accept");
-//     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS')
-//     next();
-// });
 
 // authenticate routes
 const authRoutes = require('./routes/auth-routs')
@@ -67,8 +68,6 @@ app.get('/', function(req, res) {
     }
 
     res.send(html);
-
-
 });
 
 
@@ -77,7 +76,6 @@ app.get('/', function(req, res) {
 //     req.logout();
 //     res.redirect('/');
 // });
-
 
 // express server listens for incoming traffic
 const port = 3000

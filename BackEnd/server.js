@@ -2,28 +2,33 @@
 
 const express = require('express')
 const app = express()
-const port = 3000
+
+const cors = require('cors')
+app.use(cors({
+    origin:['http://localhost:4200','http://127.0.0.1:4200'],
+    credentials:true
+}))
 
 // const passport = require('passport')
 const passportSetup = require('./config/passport-setup')
 
+
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers",
+//         "Origin, X-Requested-With, Content-Type, Accept");
+//     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS')
+//     next();
+// });
 
 // import routes from auth-routs.js file
 const authRoutes = require('./routes/auth-routs')
 // use routes from auth-routs.js file
 app.use('/auth', authRoutes)
 
-// import mongoose
-const mongoose = require('mongoose')
-const keys = require('../.keys/keys')
-
-console.log(`DB URI: ${keys.usersDB.URI}`)
 
 
-// connect to mongodb
-mongoose.connect(keys.usersDB.URI, () => {
-    console.log('Connected to MongoDB')
-})
+
 
 
 // // Express and Passport Session
@@ -69,6 +74,8 @@ app.get('/', function(req, res) {
 // });
 
 
+// express server listens for incoming traffic
+const port = 3000
 const server = app.listen(port, function() {
     console.log('Example app listening at http://%s:%s', server.address().address, server.address().port);
 })
@@ -76,9 +83,3 @@ const server = app.listen(port, function() {
 app.get('/hello', (req, res) => res.send('Hello World!'))
 
 
-// app.get('/', function(req, res){
-//     res.send("home")
-// });
-
-
-// app.listen(port, () => console.log(`Example app listening on port ${port}!`))

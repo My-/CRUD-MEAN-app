@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../services/login.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
     selector: 'app-user-login',
@@ -9,6 +10,7 @@ import {LoginService} from '../../services/login.service';
     styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
+    // TODO: matdialog of login page
 
     loginForm: FormGroup = new FormGroup({
         email: new FormControl(null, [Validators.email, Validators.required]),

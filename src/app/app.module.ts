@@ -19,6 +19,8 @@ import {RecipeService} from './services/recipe.service';
 import { MaterialModules } from './material.modules';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
+import { FooterComponent } from './components/footer/footer.component';
+
 
 @NgModule({
     declarations: [
@@ -31,6 +33,7 @@ import { RecipeViewComponent } from './components/recipe-view/recipe-view.compon
         UserProfileComponent,
         RecipeComponent,
         RecipeViewComponent,
+        FooterComponent,
     ],
     imports: [
         HttpClientModule,

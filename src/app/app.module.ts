@@ -18,6 +18,7 @@ import {RecipeService} from './services/recipe.service';
 
 import { MaterialModules } from './material.modules';
 import { RecipeComponent } from './components/recipe/recipe.component';
+import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
         UserRegisterComponent,
         UserProfileComponent,
         RecipeComponent,
+        RecipeViewComponent,
     ],
     imports: [
         HttpClientModule,

@@ -24,7 +24,6 @@ export class AddRecipeComponent implements OnInit {
     ngOnInit() {
     }
 
-
     onAddRecipe(form: NgForm) {
         console.log(form.value);
 
@@ -39,8 +38,9 @@ export class AddRecipeComponent implements OnInit {
         };
 
         this._recipeDB.add(userRecipe)
-            .subscribe(res => console.log(`
-            got back: ${JSON.stringify(res, null, 4)}`));
+            .subscribe(res => {
+                console.log(`>>>> got back: ${JSON.stringify(res, null, 4)}`);
+            });
 
         form.resetForm();
     }

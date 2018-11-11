@@ -17,6 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {RecipeService} from './services/recipe.service';
 
 import { MaterialModules } from './material.modules';
+import { RecipeComponent } from './components/recipe/recipe.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { MaterialModules } from './material.modules';
         UserLoginComponent,
         UserRegisterComponent,
         UserProfileComponent,
+        RecipeComponent,
     ],
     imports: [
         HttpClientModule,

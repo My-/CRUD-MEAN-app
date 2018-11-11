@@ -3,11 +3,14 @@ import {HttpClient} from '@angular/common/http';
 
 import {Recipe} from '../model/recipe';
 import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 export class RecipeService {
 
-    constructor(private _http: HttpClient) {
+    constructor(private _http: HttpClient,
+                private _snackBar: MatSnackBar) {
     }
 
 
@@ -17,7 +20,12 @@ export class RecipeService {
 
         const msg = {message: 'hello'};
 
-        return this._http.post('http://localhost:3000/recipe/save', userRecipe);
+        return this._http.post('http://localhost:3000/recipe/save', userRecipe)
+            .pipe(
+                tap(val => this._snackBar.open(`Recipe ${val.title} saved`, 'OK', {
+                    duration: 2000,
+                })),
+            );
         // return Observable.create(sub => sub.next(userRecipe));
     }
 }

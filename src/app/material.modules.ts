@@ -5,10 +5,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {
-    MatDialogModule, MatPaginatorModule,
-    MatSortModule, MatToolbarModule,
-} from '@angular/material';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+
+import {MatPaginatorModule, MatSortModule, MatToolbarModule} from '@angular/material';
 
 
 
@@ -23,6 +26,10 @@ import {
         MatSortModule,
         MatToolbarModule,
         MatAutocompleteModule,
+        MatSnackBarModule,
+        MatTooltipModule,
+        MatCardModule,
+        MatExpansionModule,
     ],
     exports: [
         MatTableModule,
@@ -34,8 +41,12 @@ import {
         MatSortModule,
         MatToolbarModule,
         MatAutocompleteModule,
+        MatSnackBarModule,
+        MatTooltipModule,
+        MatCardModule,
+        MatExpansionModule,
     ]
 })
 
-export class MaterialModule {
+export class MaterialModules {
 }

@@ -16,7 +16,7 @@ import {LoginService} from './services/login.service';
 import {HttpClientModule} from '@angular/common/http';
 import {RecipeService} from './services/recipe.service';
 
-import { MaterialModule } from './material.module';
+import { MaterialModules } from './material.modules';
 
 @NgModule({
     declarations: [
@@ -35,7 +35,7 @@ import { MaterialModule } from './material.module';
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        MaterialModule,
+        MaterialModules,
     ],
     providers: [LoginService, RecipeService],
     bootstrap: [AppComponent]

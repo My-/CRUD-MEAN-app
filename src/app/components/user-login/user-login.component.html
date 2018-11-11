@@ -23,10 +23,18 @@
 
         <!--OAuth-->
         <div class="button-row">
-            <button mat-stroked-button color="primary" (click)="loginGitHub()">GitHub</button>
-            <button mat-stroked-button color="primary" (click)="login()">Facebook</button>
-            <button mat-stroked-button color="primary" (click)="login()">Twitter</button>
-            <button mat-stroked-button color="primary" (click)="loginGoogle()">Google</button>
+            <button mat-stroked-button color="primary"
+                    (click)="loginGitHub()"
+                    matTooltip="Login using Github">GitHub</button>
+            <button mat-stroked-button color="primary"
+                    (click)="login()"
+                    matTooltip="login using Facebook">Facebook</button>
+            <button mat-stroked-button color="primary"
+                    (click)="login()"
+                    matTooltip="Login using Twitter">Twitter</button>
+            <button mat-stroked-button color="primary"
+                    (click)="loginGoogle()"
+                    matTooltip="Login using Google">Google</button>
         </div>
 
     </form>

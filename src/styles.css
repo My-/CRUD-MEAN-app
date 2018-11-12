@@ -7,4 +7,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .component {
     border:3px solid black;
+    color: #2ccd51;
+}
+
+/* @ref: http://jsfiddle.net/CNJZK/5/ */
+.text-highlight {
+    background: rgba(255, 230, 0, 0.5);
+    padding: 3px 5px;
+    margin: -3px -5px;
+    line-height: 1.7;
+    border-radius: 3px;
+    display:inline;
 }

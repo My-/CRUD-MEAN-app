@@ -10,8 +10,7 @@ import {MatSnackBar} from '@angular/material';
 export class RecipeService {
 
     constructor(private _http: HttpClient,
-                private _snackBar: MatSnackBar) {
-    }
+                private _snackBar: MatSnackBar) { }
 
 
     // TODO: add load data method

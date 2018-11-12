@@ -11,9 +11,9 @@ const recipeDB = mongoose.createConnection(keys.usersDB.URI, () => {
 const recipeSchema = new Schema({
     userID: Number,
     title: String,
-    allergies: [{allergy: String}],
+    allergies: [{name: String, uri: String}],
     takesTime: Number,
-    pictures: [{uri: String}],
+    pictures: [String],
     ingredients: [{
         name: String,
         amount: Number

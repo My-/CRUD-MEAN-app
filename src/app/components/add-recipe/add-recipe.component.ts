@@ -44,4 +44,12 @@ export class AddRecipeComponent implements OnInit {
 
         form.resetForm();
     }
+
+    /**
+     * Loads (saves) predefined data to DB.
+     * Used mainly for testing.
+     */
+    onLoadPredifinedData() {
+        this._recipeDB.savePredifinedDataToDB();
+    }
 }

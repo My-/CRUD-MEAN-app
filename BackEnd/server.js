@@ -31,6 +31,9 @@ app.use('/auth', authRoutes)
 const recipeRoutes = require('./routes/recipe-routs')
 app.use('/recipe', recipeRoutes)
 
+// import passport strategies
+const passportSetup = require('./config/passport-setup')
+
 
 
 

@@ -1,6 +1,11 @@
 import {Ingredient} from './ingredient';
 import {Allergy} from './allergy';
 
+import {RecipeService} from '../services/recipe.service';
+// export {RecipeService} from '../services/recipe.service';
+
+
+
 export interface Recipe {
     userID: number;
     title: string;

@@ -7,18 +7,43 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
 import {AddRecipeComponent} from './components/add-recipe/add-recipe.component';
 import {AppComponent} from './app.component';
 import {RecipeComponent} from './components/recipe/recipe.component';
+import {LoginComponent} from './components/login/login.component';
+import {SocialLoginComponent} from './components/social-login/social-login.component';
 
 const routes: Routes = [
-    // {path: '', redirectTo: 'login', pathMatch: 'full'},
-    // Landing page
-    {path: '', component: AppComponent},
-    // User
-    {path: 'login', component: UserLoginComponent},
-    {path: 'register', component: UserRegisterComponent},
-    {path: 'profile', component: UserProfileComponent},
-    // Recipe
-    {path: 'createRecipe', component: AddRecipeComponent},
-    {path: 'recipe', component: RecipeComponent},
+    {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+    }, {
+        path: 'user',
+        children: [
+            {
+                path: 'register',
+                component: UserRegisterComponent,
+            }, {
+                path: 'login',
+                component: UserLoginComponent,
+            }, {
+                path: 'social-login',
+                component: SocialLoginComponent,
+            }, {
+                path: 'profile',
+                component: UserProfileComponent,
+            }
+        ]
+    }, {
+        path: 'recipe',
+        children: [
+            {
+                path: 'createRecipe',
+                component: AddRecipeComponent,
+            }, {
+                path: 'recipe',
+                component: RecipeComponent,
+            },
+        ]
+    }
 ];
 
 @NgModule({

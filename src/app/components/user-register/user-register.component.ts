@@ -16,9 +16,11 @@ export class UserRegisterComponent implements OnInit {
         ]),
         username: new FormControl(null, [
             Validators.required,
+            Validators.minLength(3),
         ]),
         password: new FormControl(null, [
             Validators.required,
+            Validators.minLength(6),
         ]),
         repass: new FormControl(null, Validators.required)
     });

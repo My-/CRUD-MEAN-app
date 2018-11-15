@@ -12,9 +12,25 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 export class UserLoginComponent implements OnInit {
     // TODO: matdialog of login page
 
+    // https://stackoverflow.com/a/13946696/5322506
+    private _specialChars = '^[!@#$%^&*()_+\\-=\\[\\]{};\':"\\\\|,.<>\\/?]+';
+    private _alowedChar = '^[\\w&.\\-]*';
+
     loginForm: FormGroup = new FormGroup({
-        email: new FormControl(null, [Validators.email, Validators.required]),
-        password: new FormControl(null, Validators.required)
+        userName: new FormControl(null, [
+            Validators.required,
+            // Validators.email,,
+            Validators.minLength(3),
+            // Validators.pattern(this._alowedChar),
+        ]),
+        password: new FormControl(null, [
+            Validators.required,
+            Validators.minLength(6),
+            // Validators.pattern(this._specialChars),     // needs: special character
+            // Validators.pattern('^[A-Z]+'),      // needs: upper case letter
+            // Validators.pattern('^[a-z]+'),      // needs: lowercase letter
+            // Validators.pattern('^[0-9]+'),      // needs: number
+        ]),
     });
 
     hide: boolean = true;
@@ -29,7 +45,8 @@ export class UserLoginComponent implements OnInit {
 
     login() {
         if (!this.loginForm.valid) {
-            console.log('Invalid Login');
+
+            console.log(`Invalid Login: ${JSON.stringify(this.loginForm.value)}`);
             return;
         }
 

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
+import {FormControl, FormGroup, NgForm} from '@angular/forms';
 import {RecipeService} from '../../services/recipe.service';
 import {Recipe} from '../../model/recipe';
 import {AddRecipeIngredientsComponent} from '../add-recipe-ingredients/add-recipe-ingredients.component';

@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Ingredient} from '../../model/ingredient';
-import {RECIPES} from '../../model/recipe';
-
-
+import {Recipe} from '../../model/recipe';
+import {RecipeService} from '../../services/recipe.service';
 
 
 @Component({
@@ -11,11 +10,16 @@ import {RECIPES} from '../../model/recipe';
     styleUrls: ['./recipe.component.css']
 })
 export class RecipeComponent implements OnInit {
-    recipes = RECIPES;
+    recipes: Recipe[];
 
-    constructor() { }
-
-    ngOnInit() {
+    constructor(private _recipeService: RecipeService) {
+        // pull data from database
+        this._recipeService.get().subscribe(
+            data => this.recipes = data,
+            err => console.log('ERROR' + err)
+        );
     }
+
+    ngOnInit() { }
 
 }

@@ -26,4 +26,14 @@ router.post('/save', (req, res) => {
     })
 })
 
+// get recipe from DataBase
+router.get('/get', (req, res) => {
+    // TODO: get data from database
+    console.log('geting data')
+    Recipe.find((err, data) => {
+        if( err ){ console.log(err) }
+        res.json(data);
+    });
+})
+
 module.exports = router

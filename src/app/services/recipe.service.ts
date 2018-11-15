@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 
 import {Recipe, RECIPES} from '../model/recipe';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {tap, map} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material';
 
 @Injectable()
@@ -12,8 +12,6 @@ export class RecipeService {
     constructor(private _http: HttpClient,
                 private _snackBar: MatSnackBar) { }
 
-
-    // TODO: add load data method
 
     add(userRecipe: Recipe): Observable<any> {
         console.log(`Sending to server: ${JSON.stringify(userRecipe, null, 4)}...`);
@@ -26,6 +24,17 @@ export class RecipeService {
                 tap(val => console.log(`   ...got from server: ${JSON.stringify(val, null, 4)}`)),
             );
         // return Observable.create(sub => sub.next(userRecipe));
+    }
+
+    /**
+     * Get recipes from DataBase
+     */
+    get(): Observable<Recipe[]> {
+        console.log(`${'http://localhost:3000/recipe/get'}`);
+        return this._http.get('http://localhost:3000/recipe/get').pipe(
+            map(data => <Recipe[]>data),
+            tap(val => console.log(`   ...got from server: ${JSON.stringify(val, null, 4)}`))
+        );
     }
 
     /**
@@ -45,7 +54,6 @@ export class RecipeService {
                     err => console.log(err)
                 );
         });
-
-
     }
+
 }

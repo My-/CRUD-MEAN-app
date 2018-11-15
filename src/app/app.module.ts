@@ -20,6 +20,7 @@ import {MaterialModules} from './material.modules';
 import {RecipeComponent} from './components/recipe/recipe.component';
 import {RecipeViewComponent} from './components/recipe-view/recipe-view.component';
 import {FooterComponent} from './components/footer/footer.component';
+import {LoginComponent} from './components/login/login.component';
 import {SocialLoginComponent} from './components/social-login/social-login.component';
 
 
@@ -35,6 +36,7 @@ import {SocialLoginComponent} from './components/social-login/social-login.compo
         RecipeComponent,
         RecipeViewComponent,
         FooterComponent,
+        LoginComponent,
         SocialLoginComponent,
     ],
     imports: [
@@ -45,6 +47,9 @@ import {SocialLoginComponent} from './components/social-login/social-login.compo
         FormsModule,
         ReactiveFormsModule,
         MaterialModules,
+    ],
+    entryComponents: [
+        LoginComponent,
     ],
     providers: [
         LoginService,

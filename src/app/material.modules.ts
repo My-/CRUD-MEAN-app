@@ -48,5 +48,4 @@ import {MatPaginatorModule, MatSortModule, MatToolbarModule} from '@angular/mate
     ]
 })
 
-export class MaterialModules {
-}
+export class MaterialModules { }

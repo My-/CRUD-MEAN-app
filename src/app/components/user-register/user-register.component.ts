@@ -10,9 +10,16 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 export class UserRegisterComponent implements OnInit {
 
     registerForm: FormGroup = new FormGroup({
-        email: new FormControl(null, [Validators.email, Validators.required]),
-        username: new FormControl(null, Validators.required),
-        password: new FormControl(null, Validators.required),
+        email: new FormControl(null, [
+            Validators.email,
+            Validators.required,
+        ]),
+        username: new FormControl(null, [
+            Validators.required,
+        ]),
+        password: new FormControl(null, [
+            Validators.required,
+        ]),
         repass: new FormControl(null, Validators.required)
     });
 

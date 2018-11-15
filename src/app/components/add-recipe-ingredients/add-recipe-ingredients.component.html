@@ -16,7 +16,8 @@
                        required
                        #ingredient="ngModel"
                        [matAutocomplete]="auto">
-                       <!--[formControl]="ingredientsCtrl">-->  <!-- TODO: fix it -->
+                       <!--[formControl]="ingredientsCtrl">-->
+                <!--TODO: fix it -->
                 <mat-autocomplete #auto="matAutocomplete">
                     <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient.name">
                         <span>{{ingredient.name}}</span>

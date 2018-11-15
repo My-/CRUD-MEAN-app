@@ -16,10 +16,10 @@ import {LoginService} from './services/login.service';
 import {HttpClientModule} from '@angular/common/http';
 import {RecipeService} from './services/recipe.service';
 
-import { MaterialModules } from './material.modules';
-import { RecipeComponent } from './components/recipe/recipe.component';
-import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
-import { FooterComponent } from './components/footer/footer.component';
+import {MaterialModules} from './material.modules';
+import {RecipeComponent} from './components/recipe/recipe.component';
+import {RecipeViewComponent} from './components/recipe-view/recipe-view.component';
+import {FooterComponent} from './components/footer/footer.component';
 import {SocialLoginComponent} from './components/social-login/social-login.component';
 
 
@@ -46,8 +46,13 @@ import {SocialLoginComponent} from './components/social-login/social-login.compo
         ReactiveFormsModule,
         MaterialModules,
     ],
-    providers: [LoginService, RecipeService],
-    bootstrap: [AppComponent]
+    providers: [
+        LoginService,
+        RecipeService,
+    ],
+    bootstrap: [
+        AppComponent,
+    ]
 })
 export class AppModule {
 }

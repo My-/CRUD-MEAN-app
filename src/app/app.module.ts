@@ -20,6 +20,7 @@ import { MaterialModules } from './material.modules';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
 import { FooterComponent } from './components/footer/footer.component';
+import {SocialLoginComponent} from './components/social-login/social-login.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { FooterComponent } from './components/footer/footer.component';
         RecipeComponent,
         RecipeViewComponent,
         FooterComponent,
+        SocialLoginComponent,
     ],
     imports: [
         HttpClientModule,

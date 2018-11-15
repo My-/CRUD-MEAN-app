@@ -43,11 +43,4 @@ export class UserLoginComponent implements OnInit {
 
     }
 
-    loginGitHub() {
-        this._loginService.github().subscribe(res => console.log(res));
-    }
-
-    loginGoogle() {
-        this._loginService.google().subscribe(res => console.log(res));
-    }
 }

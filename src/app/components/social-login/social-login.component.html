@@ -1,0 +1,28 @@
+<div class="component">
+    <p class="text-highlight">social-login works!</p>
+
+
+    <!--OAuth-->
+    <div>
+        <p><button mat-stroked-button
+                color="primary"
+                (click)="loginGitHub()"
+                matTooltip="Login using Github"
+        >GitHub</button></p>
+        <button mat-stroked-button
+                color="primary"
+                (click)="login()"
+                matTooltip="login using Facebook"
+        >Facebook</button>
+        <button mat-stroked-button
+                color="primary"
+                (click)="login()"
+                matTooltip="Login using Twitter"
+        >Twitter</button>
+        <button mat-stroked-button
+                color="primary"
+                (click)="loginGoogle()"
+                matTooltip="Login using Google"
+        >Google</button>
+    </div>
+</div>

@@ -19,11 +19,9 @@ export class UserLoginComponent implements OnInit {
 
     hide: boolean = true;
 
-    constructor(private _router: Router, private _loginService: LoginService) {
-    }
+    constructor(private _router: Router, private _loginService: LoginService) { }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
     goToRgister() {
         this._router.navigate(['/register']);

@@ -18,11 +18,10 @@ export class AddRecipeComponent implements OnInit {
 
     @ViewChild(AddRecipeIngredientsComponent) recipeIngredients: AddRecipeIngredientsComponent;
 
-    constructor(private _recipeDB: RecipeService) {
-    }
+    constructor(private _recipeDB: RecipeService) {  }
 
-    ngOnInit() {
-    }
+
+    ngOnInit() { }
 
     onAddRecipe(form: NgForm) {
         console.log(form.value);

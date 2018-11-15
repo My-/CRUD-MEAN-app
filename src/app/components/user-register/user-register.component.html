@@ -2,38 +2,44 @@
     <p class="text-highlight">user-register</p>
 
     <form [formGroup]="registerForm">
-        <mat-form-field >
-        </mat-form-field>
-
-        <mat-form-field >
-        </mat-form-field>
-
-        <mat-form-field >
-        </mat-form-field>
-
-        <mat-form-field >
-        </mat-form-field>
+        <p><mat-form-field >
             <input formControlName="email"
                    matInput
                    placeholder="Email"
                    type="text"
+            ><mat-hint>Valid email</mat-hint>
+        </mat-form-field></p>
+
+        <p><mat-form-field >
             <input formControlName="username"
                    matInput
                    placeholder="User name"
                    type="text"
+            ><mat-hint>Minimum 3 characters</mat-hint>
+        </mat-form-field></p>
+
+        <p><mat-form-field >
             <input formControlName="password"
                    matInput
                    placeholder="Password"
                    type="password"
+            ><mat-hint>Minimum 6 characters</mat-hint>
+        </mat-form-field></p>
+
+        <p><mat-form-field >
             <input formControlName="repass"
                    matInput
                    placeholder="Password"
                    type="password"
+            ><mat-hint>Password should mach</mat-hint>
+        </mat-form-field></p>
 
     </form>
 
-    <button mat-stroked-button color="primary" (click)="goToLogin()">Login</button>
-    <button mat-stroked-button color="primary" (click)="register()">Register</button>
+    <p>
+        <button mat-stroked-button color="primary" (click)="goToLogin()">Login</button>
+        <button mat-stroked-button color="primary" (click)="register()">Register</button>
+    </p>
 
 
 </div>

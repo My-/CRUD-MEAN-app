@@ -41,7 +41,7 @@ export class RecipeService {
      * Loads all data from const array RECIPES to DB.
      * Use just for testing/initial data purposes.
      */
-    savePredifinedDataToDB() {
+    savePredefinedDataToDB() {
         console.log('Loading predefined data to DB...');
 
         RECIPES.forEach(recipe => {

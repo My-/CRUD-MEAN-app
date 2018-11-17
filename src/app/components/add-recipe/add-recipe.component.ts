@@ -49,6 +49,6 @@ export class AddRecipeComponent implements OnInit {
      * Used mainly for testing.
      */
     onLoadPredifinedData() {
-        this._recipeDB.savePredifinedDataToDB();
+        this._recipeDB.savePredefinedDataToDB();
     }
 }

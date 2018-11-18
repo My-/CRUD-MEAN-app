@@ -22,6 +22,7 @@ import {RecipeViewComponent} from './components/recipe-view/recipe-view.componen
 import {FooterComponent} from './components/footer/footer.component';
 import {LoginComponent} from './components/login/login.component';
 import {SocialLoginComponent} from './components/social-login/social-login.component';
+import {UserService} from './services/user.service';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import {SocialLoginComponent} from './components/social-login/social-login.compo
     providers: [
         LoginService,
         RecipeService,
+        UserService,
     ],
     bootstrap: [
         AppComponent,

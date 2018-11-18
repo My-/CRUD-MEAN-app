@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../services/user.service';
+import {LoggedUser, User} from '../../model/user';
 
 @Component({
     selector: 'app-user-profile',
@@ -7,8 +9,12 @@ import {Component, OnInit} from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
+    currentUser: User;
+
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.currentUser = LoggedUser.get();
+    }
 
 }

@@ -1,5 +1,9 @@
 <div class="component">
     <p class="text-highlight">user-profile works!</p>
 
+    <H2>User: </H2>
+    <span *ngIf="currentUser">{{currentUser.userName}}</span>
+    <span *ngIf="!currentUser">No user</span>
+
 </div>
 

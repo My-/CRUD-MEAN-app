@@ -25,7 +25,7 @@ export class UserLoginComponent implements OnInit {
         ]),
         password: new FormControl(null, [
             Validators.required,
-            Validators.minLength(6),
+            Validators.minLength(4),
             // Validators.pattern(this._specialChars),     // needs: special character
             // Validators.pattern('^[A-Z]+'),      // needs: upper case letter
             // Validators.pattern('^[a-z]+'),      // needs: lowercase letter

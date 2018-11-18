@@ -28,8 +28,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # References:
 - (Angular + pasport)https://www.youtube.com/watch?v=IlpU1z3cvSQ
-- (passport + express)https://www.youtube.com/watch?v=CHodPpqLqG8&index=2&list=PL4cUxeGkcC9jdm7QX143aMLAqyM-jTZ2x
+- (passport + express) https://www.youtube.com/watch?v=CHodPpqLqG8&index=2&list=PL4cUxeGkcC9jdm7QX143aMLAqyM-jTZ2x
 - (passportjs) http://www.passportjs.org/
 - (MEAN + Angular6) https://auth0.com/blog/real-world-angular-series-part-1/
 - (passportjs + github login) https://www.jokecamp.com/tutorial-passportjs-authentication-in-nodejs/
 - (Angular + PWA) https://vitalflux.com/angular-6-create-pwa-progressing-web-app/
+- (bcryptjs + passpotrjs) https://github.com/apoorvlala/Login-APP-using-Node.js-Expressjs-Passportjs-Bcryptjs-and-MongoDB
+- (JWT) https://medium.com/front-end-hacking/learn-using-jwt-with-passport-authentication-9761539c4314
+- ()

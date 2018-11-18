@@ -1,11 +1,34 @@
-const keys = require('../../.keys/keys')
-
 const passport = require('passport')
+
 const GithubStrategy = require('passport-github').Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy
+const LocalStrategy = require('passport-local').Strategy
+const bcrypt = require('bcryptjs')
 
 const User = require('../models/user-model')
+const keys = require('../../.keys/keys')
 
+// Local Strategy
+passport.use(
+    new LocalStrategy( (username, password, done) => {
+        User.findOne({ userName: username })
+        // Check if user exist in db
+        .then(user => {
+            if( !user ){ return done(null, false, {message: 'user not found'}) }
+            else{ return user }
+        })
+        // If user exist check given password against users password (bcryptjs)
+        .then(user => {
+            return bcrypt.compare(password, user.password)
+                .then((res) => {
+                    if( !res ){ return done(null, false, {message: 'wrong password'}) }
+                    else{ return done(null, user, {message: 'User is authenticated'}) }
+            })
+        })
+        // in case here some errors
+        .catch(err => {return done(err)})
+    })
+);
 
 passport.use(
     new GithubStrategy({

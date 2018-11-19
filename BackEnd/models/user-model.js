@@ -16,8 +16,12 @@ const userSchema = new Schema({
         type: String,
         unique: true,
         required: true
-    }, // String,
-    loginMethod: String,
+    },
+    loginMethod: {
+        type: String,
+        required: () => !this.password,
+        default: LoginMethods.LOCAL,
+    },
     password: {
         type: String,
         required: () => this.loginMethod === LoginMethods.LOCAL,

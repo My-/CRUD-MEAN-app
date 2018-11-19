@@ -31,6 +31,7 @@ router.post('/register', (req, res, next) => {
         .then(newUser => { console.log(`Saved user: ${newUser}`); return newUser; } )
         // get users info for JWT token
         .then(savedUser => {return {
+            id: savedUser._id,
             userName: savedUser.userName,
             gender: savedUser.gender,
             avatar: savedUser.avatar,

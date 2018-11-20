@@ -22,6 +22,7 @@ const recipeSchema = new Schema({
         type: String,
         required: true,
     },
+    comments: [{id: Number}],
     created: { type: Date, default: Date.now },
 })
 

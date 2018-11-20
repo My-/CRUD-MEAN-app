@@ -15,6 +15,10 @@ const commentSchema = new Schema({
         type: String,
         required: true,
     },
+    recipeID: {
+        type: String,
+        required: true,
+    },
     text: {
         type: String,
         required: true,

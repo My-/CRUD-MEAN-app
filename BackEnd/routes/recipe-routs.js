@@ -1,9 +1,11 @@
 const router = require('express').Router()
-const Recipe = require('../models/recipe-model')
+const request = require('request');
+
 const ExtractJwt = require('passport-jwt').ExtractJwt
 const jwt = require('jsonwebtoken')
 
 const keys = require('../../.keys/keys')
+const Recipe = require('../models/recipe-model')
 
 
 
@@ -49,14 +51,11 @@ router.post('/', (req, res) => {
 
 })
 
-// get recipe from DataBase
-router.get('/get', (req, res) => {
-    // TODO: get data from database
-    console.log('geting data')
-    Recipe.find((err, data) => {
-        if( err ){ console.log(err) }
-        res.json(data);
-    });
+// get recipe from DataBase by recipe id (parameter: recipeID)
+router.get('/', (req, res) => {
+    Recipe.findById(req.query.recipeID)
+        .then(recipe => res.json(200, {recipe}))
+        .catch(err => res.json(400, {err}))
 })
 
 module.exports = router

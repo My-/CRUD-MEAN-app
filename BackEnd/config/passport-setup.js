@@ -3,14 +3,32 @@ const passport = require('passport')
 const GithubStrategy = require('passport-github').Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const LocalStrategy = require('passport-local').Strategy
+const JwtStrategy = require('passport-jwt').Strategy
+const ExtractJwt = require('passport-jwt').ExtractJwt
+
 const bcrypt = require('bcryptjs')
 
 const User = require('../models/user-model')
 const keys = require('../../.keys/keys')
 
+// JWT Strategy
+const opts = {}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = keys.JWT.secret;
+// opts.issuer = 'accounts.examplesoft.com';
+// opts.audience = 'yoursite.net';
+
+passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
+    //find the user in db by id (id is from JWT)
+    User.findById(jwtPayload.payload.id)
+        .then(user => done(null, user))
+        .catch(err => done(err))
+    })
+);
+
+
 // Local Strategy
-passport.use(
-    new LocalStrategy( (username, password, done) => {
+passport.use(new LocalStrategy( (username, password, done) => {
         User.findOne({ userName: username })
         // Check if user exist in db
         .then(user => {
@@ -30,8 +48,8 @@ passport.use(
     })
 );
 
-passport.use(
-    new GithubStrategy({
+// GitHub Strategy
+passport.use(new GithubStrategy({
         clientID: keys.GitHub.clientID,
         clientSecret: keys.GitHub.clientSecret,
         callbackURL: keys.GitHub.callbackURL
@@ -53,6 +71,7 @@ passport.use(
     })
 )
 
+// Google Strategy
 passport.use(
     new GoogleStrategy({
         clientID: keys.Google.clientID,

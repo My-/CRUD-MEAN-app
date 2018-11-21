@@ -2,7 +2,9 @@
 
 const express = require('express')
 const app = express()
-
+const passport = require('passport')
+// import passport strategies
+// require('./config/passport-setup')
 // body parser should be used before routes
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
@@ -31,8 +33,15 @@ app.use('/auth', authRoutes)
 const recipeRoutes = require('./routes/recipe-routs')
 app.use('/recipe', recipeRoutes)
 
-// import passport strategies
-const passportSetup = require('./config/passport-setup')
+// users routes
+const userRoutes = require('./routes/users-routs')
+app.use('/user', userRoutes)
+
+// users routes
+const commentRoutes = require('./routes/comment-routes')
+app.use('/comment', commentRoutes)
+
+
 
 
 

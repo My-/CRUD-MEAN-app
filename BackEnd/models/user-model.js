@@ -32,11 +32,11 @@ const userSchema = new Schema({
         default: 'other',
     },
     recipes: {
-        like: [{id: Number}],
-        own: [{id: Number}],
-        saved: [{id: Number}],
+        like: [{id: String}],
+        own: [{id: String}],
+        saved: [{id: String}],
     },
-    comments: [{id: Number}],
+    comments: [{_id: String}],
     profile: Object,
     created: { type: Date, default: Date.now },
 })

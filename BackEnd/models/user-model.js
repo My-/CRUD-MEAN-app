@@ -4,14 +4,16 @@ const bcrypt = require('bcryptjs');
 
 const keys = require('../../.keys/keys')
 const LoginMethods = require('../routes/loginMethods').LoginMethods
+const RecipeSchema = require('./recipe-model')
+const CommentSchema = require('./comment-model')
 
 // connect to mongodb Users
-const userDB = mongoose.createConnection(keys.usersDB.URI, () => {
+const userDB = mongoose.createConnection(keys.DB.URI, () => {
     console.log('Connected to MongoDB: Users')
 })
 
 // schema for user model
-const userSchema = new Schema({
+const UserSchema = new Schema({
     userName: {
         type: String,
         unique: true,
@@ -29,37 +31,39 @@ const userSchema = new Schema({
     avatar: String,
     gender: {
         type: String,
-        default: 'other',
+        default: null,
     },
     recipes: {
-        like: [{id: String}],
-        own: [{id: String}],
-        saved: [{id: String}],
+        like: [RecipeSchema],
+        own: [RecipeSchema],
+        saved: [RecipeSchema],
     },
-    comments: [{_id: String}],
+    comments: [CommentSchema],
     profile: Object,
     created: { type: Date, default: Date.now },
 })
 
-userSchema.statics.hashPassword = function hashPassword(password){
+
+UserSchema.statics.hashPassword = function hashPassword(password){
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
     // Store hash in your password DB.
     return hash;
 }
 
-userSchema.methods.isValid = function(hashedpassword){
+UserSchema.methods.isValid = function(hashedpassword){
     return bcrypt.compareSync(hashedpassword, this.password);
 }
 
-userSchema.methods.verifyPassword = function(password){
+UserSchema.methods.verifyPassword = function(password){
     // Load hash from your password DB.
     const hash = this.password
     return bcrypt.compareSync(password, hash)
 }
 
 // user model
-const User = userDB.model('user', userSchema)
+const UserModel = userDB.model('user', UserSchema)
 
 // export user model
-module.exports = User
+module.exports = UserModel
+module.exports = UserSchema

@@ -1,33 +1,34 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const keys = require('../../.keys/keys')
 
-// connect to mongodb Recipes
-const recipeDB = mongoose.createConnection(keys.usersDB.URI, () => {
+const keys = require('../../.keys/keys')
+const CommentSchema = require('./comment-model')
+const UserSchema = require('./user-model')
+const IngredientSchema = require('./ingredient')
+
+// connect to mongodb
+const DB = mongoose.createConnection(keys.DB.URI, () => {
     console.log('Connected to MongoDB: Recipes')
 })
 
 // schema for user model
-const recipeSchema = new Schema({
-    userID: String,
+const RecipeSchema = new Schema({
+    user: UserSchema,
     title: String,
-    allergies: [{name: String, uri: String}],
     takesTime: Number,
     pictures: [String],
-    ingredients: [{
-        name: String,
-        amount: Number
-    }],    // Ingredient object
+    ingredients: [IngredientSchema],
     recipe: {
         type: String,
         required: true,
     },
-    comments: [{id: Number}],
+    comments: [CommentSchema],
     created: { type: Date, default: Date.now },
 })
 
 // user model
-const Recipe = recipeDB.model('recipe', recipeSchema)
+const RecipeModel = DB.model('recipe', RecipeSchema)
 
 // export user model
-module.exports = Recipe
+module.exports = RecipeModel
+module.exports = RecipeSchema

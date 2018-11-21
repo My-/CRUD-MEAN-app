@@ -35,4 +35,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - (Angular + PWA) https://vitalflux.com/angular-6-create-pwa-progressing-web-app/
 - (bcryptjs + passpotrjs) https://github.com/apoorvlala/Login-APP-using-Node.js-Expressjs-Passportjs-Bcryptjs-and-MongoDB
 - (JWT) https://medium.com/front-end-hacking/learn-using-jwt-with-passport-authentication-9761539c4314
-- ()
+- (mangoose validators) https://github.com/leepowellcouk/mongoose-validator
+- (express Link redirect) https://stackoverflow.com/questions/19035373/how-do-i-redirect-in-expressjs-while-passing-some-context
+- (Promises create) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+- () https://scotch.io/tutorials/javascript-promises-for-dummies
+- ()  

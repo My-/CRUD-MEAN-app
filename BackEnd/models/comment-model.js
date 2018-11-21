@@ -24,7 +24,7 @@ const commentSchema = new Schema({
         required: true,
         validate: validate({
             validator: 'isLength',
-            arguments: [10, 1000],
+            arguments: [5, 1000],
             message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
         })
     },
@@ -34,7 +34,7 @@ const commentSchema = new Schema({
 })
 
 // user model
-const Comments = DB.model('user', commentSchema)
+const Comments = DB.model('comment', commentSchema)
 
 // export user model
 module.exports = Comments

@@ -5,7 +5,9 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 const jwt = require('jsonwebtoken')
 
 const keys = require('../../.keys/keys')
-const Recipe = require('../models/recipe-model')
+const RecipeModel = require('../models/recipe-model')
+const IngredientModel = require('../models/ingredient-model')
+const UserModel = require('../models/user-model')
 
 
 
@@ -20,6 +22,7 @@ router.post('/', (req, res) => {
      * 4. Send back response.
      */
     Promise.resolve(req)
+        // validate JWT
         .then(data => ExtractJwt.fromAuthHeaderAsBearerToken()(data))
         .then(jwtToken => jwt.verify(jwtToken, keys.JWT.secret))
         .then(tokenData => tokenData.payload.id)
@@ -28,25 +31,48 @@ router.post('/', (req, res) => {
         // userID !== null  -> verified user
         .then(userID => createRecipe({userID, recipe: req.body}))
         .then(recipe => recipe.save())
-        .then(newRecipe => res.json(200, newRecipe))
-        .catch(err => res.json(400, {err}))
+        .then(newRecipe => userAddRecipe({recipe: newRecipe}))
+        .then(user => res.status(200).json(user))
+        .catch(err => res.status(400).json({err}))
 
 
     /**
      * Creates recipe from request
      * @param userID - id of the user who creates recipe
      * @param recipe - recipe data
+     * @return new RecipeModel
      */
     function createRecipe({userID, recipe}) {
-        return new Recipe({
-            userID,
+        console.log('creating recipe')
+        return new RecipeModel({
+            User: userID,
             title: recipe.title,
             allergies: recipe.allergies,
             takesTime: recipe.takesTime,
             pictures: recipe.pictures,
             ingredients: recipe.ingredients,    // Ingredient object
-            recipe: recipe.recipe,
+            instructions: recipe.instructions,
         })
+    }
+
+    /**
+     * Adds created recipe ref ID to users recipe array
+     * @param recipe
+     * @return {*}
+     */
+    function userAddRecipe({recipe}){
+        console.log('adding to user')
+        if( !recipe.User ){
+            console.log('anonymous recipe')
+            return new Promise(resolve => resolve({userName: 'Anonymous', recipe:[recipe._id]}))
+        }
+
+        return UserModel.findByIdAndUpdate(
+            recipe.User,
+            {$push: {recipes: recipe._id}},
+            {safe: true, new : true},
+        )
+            .then(user => {console.log(`Recipe recorded. ${user.userName} recipes: ${user.recipes} `); return user})
     }
 
 })

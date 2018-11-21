@@ -39,4 +39,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - (express Link redirect) https://stackoverflow.com/questions/19035373/how-do-i-redirect-in-expressjs-while-passing-some-context
 - (Promises create) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 - () https://scotch.io/tutorials/javascript-promises-for-dummies
-- ()  
+- (Referencing another schema in Mongoose) https://stackoverflow.com/questions/18001478/referencing-another-schema-in-mongoose#18002078
+- ()

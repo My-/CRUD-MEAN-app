@@ -12,12 +12,12 @@ const RecipeSchema = require('./recipe-schema')
 const CommentSchema = new Schema({
     user: {
         type: ObjectId,
-        ref: "UserSchema",
+        ref: "User",
         required: true,
     },
     recipe: {
         type: ObjectId,
-        ref: "RecipeSchema",
+        ref: "Recipe",
         required: true,
     },
     text: {
@@ -29,9 +29,13 @@ const CommentSchema = new Schema({
             message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
         })
     },
-    responds: [this],
+    responds: [{
+        type: ObjectId,
+        ref: "Comment",
+    }],
     created: { type: Date, default: Date.now },
     edited: { type: Date },
 })
 
+mongoose.model('Comment', CommentSchema)
 module.exports = CommentSchema

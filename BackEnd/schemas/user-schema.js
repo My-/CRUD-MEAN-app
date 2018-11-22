@@ -33,11 +33,12 @@ const UserSchema = new Schema({
     },
     recipes: [{
         type: ObjectId,
-        ref: "RecipeSchema",
+        // ref: "RecipeSchema",
+        ref: "Recipe",
     }],
     comments: [{
         type: ObjectId,
-        ref: "CommentSchema",
+        ref: "Comment",
     }],
     profile: Object,
     created: { type: Date, default: Date.now },
@@ -60,5 +61,6 @@ UserSchema.methods.verifyPassword = function(password){
     return bcrypt.compareSync(password, hash)
 }
 
+mongoose.model('User', UserSchema)
 // export
 module.exports = UserSchema

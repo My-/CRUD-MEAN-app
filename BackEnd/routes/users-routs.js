@@ -15,17 +15,11 @@ router.get('/comments', passport.authenticate('jwt', {session: false}), (req, re
         .catch(err => res.status(400).json({err}))
 })
 
-// get user owning, liked, saved recipes
+// get user recipes
 router.get('/recipes', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-    switch( req.query.type ){
-        case 'saved':
-        case 'own':
-        case 'like': break;
-        default:
-            return res.status(404).json({message: `Not allowed parameter(s): [${req.query.type}]`})
-    }
-
-    UserModel.findById(req.user.id, [`recipes.${req.query.type}`])
+    // Find user using JWT data
+    UserModel.findById(req.user.id)
+        .populate('recipes')    // populate recipes (document instead of reference)
         .then(val => res.status(200).json(val.recipes))
         .catch(err => res.status(400).json({err}))
 })

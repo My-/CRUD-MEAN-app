@@ -14,7 +14,10 @@ const RecipeSchema = new Schema({
         ref: "UserSchema",
         default: null,
     },
-    title: String,
+    title: {
+        type: String,
+        required: true
+    },
     takesTime: Number,
     pictures: [String],
     ingredients: [{
@@ -27,9 +30,17 @@ const RecipeSchema = new Schema({
     },
     comments: [{
         type: ObjectId,
-        ref: "CommentSchema",
+        ref: "Comment",
     }],
     created: { type: Date, default: Date.now },
 })
 
+// // https://stackoverflow.com/a/11905116/5322506
+// RecipeSchema.pre('remove', function(next){
+//     console.log(`Deleting from user ${this.User} recipe ${this._id}`)
+//     // Remove all the assignment docs that reference the removed person.
+//     this.model('User').update({_id: this.User}, {$pull: {recipes:  this._id }}, next);
+// });
+
+mongoose.model('Recipe', RecipeSchema)
 module.exports = RecipeSchema

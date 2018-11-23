@@ -10,14 +10,19 @@ const RecipeSchema = require('./recipe-schema')
 
 // schema
 const CommentSchema = new Schema({
-    user: {
+    User: {
         type: ObjectId,
         ref: "User",
         required: true,
     },
-    recipe: {
+    parentType: {
+        type: String,
+        required: [true, 'Missing parrentType property. Reference populator needs to know type'],
+        enum: ["Recipe", "Comment"]
+    },
+    Parent: {
         type: ObjectId,
-        ref: "Recipe",
+        ref: `"${this.parentType}"`,
         required: true,
     },
     text: {
@@ -29,7 +34,7 @@ const CommentSchema = new Schema({
             message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
         })
     },
-    responds: [{
+    comments: [{
         type: ObjectId,
         ref: "Comment",
     }],

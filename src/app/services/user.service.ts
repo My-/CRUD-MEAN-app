@@ -11,7 +11,24 @@ import {map, tap} from 'rxjs/operators';
 
 export class UserService {
 
-    constructor(private _http: HttpClient) {
+    constructor(private _http: HttpClient) { }
+
+    /**
+     * Get user from DB by it's ID.
+     * @param id - of the user we requesting
+     */
+    getByID(id: number): Observable<User> {
+        return Observable.create();
+    }
+
+    /**
+     * Save new user to DB.
+     * @param user - we want to save
+     */
+    saveToDB(user: User): Observable<any> {
+        return Observable.create();
+    }
+
     /**
      * Logs user in.
      *      - post user to express,

@@ -36,6 +36,19 @@ router.get('/recipes', passport.authenticate('jwt', {session: false}), (req, res
         .catch(err => res.status(400).json({err}))
 })
 
+// get user details
+router.get('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    UserModel.findById(req.user._id)
+        .then(user => {
+            if( !user ){
+                throw 'Fatal Error! Here is no user with your token'
+            }
+            return user
+        })
+        .then(user => res.status(200).json(user))
+        .catch(err => res.status(400).json({err}))
+})
+
 // update user details JWT protected
 router.put('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     const resObj = {}   // response object
@@ -68,7 +81,7 @@ router.delete('/', passport.authenticate('jwt', {session: false}), (req, res, ne
 })
 
 // Create new user
-router.post('/register', (req, res, next) => {
+router.post('/', (req, res, next) => {
 
     new Promise((resolve, reject) => {
         if( !req.body.userName ){ reject('body.userName is required.') }

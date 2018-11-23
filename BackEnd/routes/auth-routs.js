@@ -5,11 +5,6 @@ const jwt = require('jsonwebtoken')
 const keys = require('../../.keys/keys')
 
 
-// auth login
-router.get('/login', (req, res) => {
-    res.render('login') // redirect to login page
-})
-
 // auth logout
 router.get('/logout', (req, res) => {
     // handle with passport
@@ -22,7 +17,6 @@ router.get('/logout', (req, res) => {
 
 // auth with local
 router.post('/localLogin', (req, res, next) => {
-
     passport.authenticate('local', { failureRedirect: '/login', session: false }, (err, user, info) => {
         // error or no user (wrong password or not in DB)
         if (err || !user) {

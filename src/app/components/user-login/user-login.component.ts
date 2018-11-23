@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../services/login.service';
+import {UserService} from '../../services/user.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {LoggedUser} from '../../model/user';
 
 @Component({
     selector: 'app-user-login',
@@ -35,7 +37,10 @@ export class UserLoginComponent implements OnInit {
 
     hide: boolean = true;
 
-    constructor(private _router: Router, private _loginService: LoginService) { }
+    constructor(private _router: Router,
+                private _loginService: LoginService,
+                private _userService: UserService,
+                ) { }
 
     ngOnInit() { }
 
@@ -50,7 +55,19 @@ export class UserLoginComponent implements OnInit {
             return;
         }
 
-        console.log(JSON.stringify(this.loginForm.value));
+        // console.log(JSON.stringify(this.loginForm.value));
+        const user = {
+            username: this.loginForm.value.userName,
+            password: this.loginForm.value.password,
+        };
+
+        this._userService.login({user}).subscribe(val => {
+            console.log('loged in');
+            console.log(val);
+            console.log();
+            console.log('Logged User: ');
+            console.log(LoggedUser.get());
+        });
     }
 
     logout() {

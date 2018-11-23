@@ -11,6 +11,12 @@ require('../config/passport-setup')
 // get user comments
 router.get('/comments', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     UserModel.findById(req.user.id, [`comments`])
+        .then(user => {
+            if( !user ){
+                throw 'Fatal Error! Here is no user with your token'
+            }
+            return user
+        })
         .then(val => res.status(200).json(val))
         .catch(err => res.status(400).json({err}))
 })
@@ -20,6 +26,12 @@ router.get('/recipes', passport.authenticate('jwt', {session: false}), (req, res
     // Find user using JWT data
     UserModel.findById(req.user.id)
         .populate('recipes')    // populate recipes (document instead of reference)
+        .then(user => {
+            if( !user ){
+                throw 'Fatal Error! Here is no user with your token'
+            }
+            return user
+        })
         .then(val => res.status(200).json(val.recipes))
         .catch(err => res.status(400).json({err}))
 })

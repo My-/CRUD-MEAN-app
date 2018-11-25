@@ -8,7 +8,6 @@ import {AddRecipeComponent} from './components/recipes-components/add-recipe/add
 import {AppComponent} from './app.component';
 import {RecipeComponent} from './components/recipes-components/recipe/recipe.component';
 import {LoginComponent} from './components/user-components/login/login.component';
-import {SocialLoginComponent} from './components/user-components/social-login/social-login.component';
 
 const routes: Routes = [
     {
@@ -24,9 +23,6 @@ const routes: Routes = [
             }, {
                 path: 'login',
                 component: UserLoginComponent,
-            }, {
-                path: 'social-login',
-                component: SocialLoginComponent,
             }, {
                 path: 'profile',
                 component: UserProfileComponent,

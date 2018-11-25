@@ -12,7 +12,6 @@ import {UserRegisterComponent} from './components/user-components/user-register/
 import {UserProfileComponent} from './components/user-components/user-profile/user-profile.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {LoginService} from './services/login.service';
 import {HttpClientModule} from '@angular/common/http';
 import {RecipeService} from './services/recipe.service';
 
@@ -21,7 +20,6 @@ import {RecipeComponent} from './components/recipes-components/recipe/recipe.com
 import {RecipeViewComponent} from './components/recipes-components/recipe-view/recipe-view.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {LoginComponent} from './components/user-components/login/login.component';
-import {SocialLoginComponent} from './components/user-components/social-login/social-login.component';
 import {UserService} from './services/user.service';
 import {HeaderComponent} from './components/header/header.component';
 import {BodyComponent} from './components/body/body.component';
@@ -42,7 +40,6 @@ import {SideNavService} from './services/side-nav.service';
         RecipeViewComponent,
         FooterComponent,
         LoginComponent,
-        SocialLoginComponent,
         HeaderComponent,
         BodyComponent,
     ],
@@ -60,7 +57,6 @@ import {SideNavService} from './services/side-nav.service';
         LoginComponent,
     ],
     providers: [
-        LoginService,
         RecipeService,
         UserService,
         YummlyService,

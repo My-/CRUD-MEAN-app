@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service';
 import {LoggedUser, User} from '../../../model/user';
 
@@ -16,5 +16,9 @@ export class UserProfileComponent implements OnInit {
     ngOnInit() {
         this.currentUser = LoggedUser.get();
     }
+
+
+
+
 
 }

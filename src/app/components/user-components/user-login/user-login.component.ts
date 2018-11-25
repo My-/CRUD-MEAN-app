@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {LoginService} from '../../../services/login.service';
 import {UserService} from '../../../services/user.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import {LoggedUser} from '../../../model/user';
@@ -36,10 +35,9 @@ export class UserLoginComponent implements OnInit {
         ]),
     });
 
-    hide: boolean = true;
+    hide = true;
 
     constructor(private _router: Router,
-                private _loginService: LoginService,
                 private _userService: UserService,
                 private _dialogRef: MatDialogRef<LoginComponent>,
                 private _snackBar: MatSnackBar,

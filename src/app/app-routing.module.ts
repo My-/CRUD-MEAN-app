@@ -1,14 +1,14 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 
-import {UserLoginComponent} from './components/user-login/user-login.component';
-import {UserRegisterComponent} from './components/user-register/user-register.component';
-import {UserProfileComponent} from './components/user-profile/user-profile.component';
-import {AddRecipeComponent} from './components/add-recipe/add-recipe.component';
+import {UserLoginComponent} from './components/user-components/user-login/user-login.component';
+import {UserRegisterComponent} from './components/user-components/user-register/user-register.component';
+import {UserProfileComponent} from './components/user-components/user-profile/user-profile.component';
+import {AddRecipeComponent} from './components/recipes-components/add-recipe/add-recipe.component';
 import {AppComponent} from './app.component';
-import {RecipeComponent} from './components/recipe/recipe.component';
-import {LoginComponent} from './components/login/login.component';
-import {SocialLoginComponent} from './components/social-login/social-login.component';
+import {RecipeComponent} from './components/recipes-components/recipe/recipe.component';
+import {LoginComponent} from './components/user-components/login/login.component';
+import {SocialLoginComponent} from './components/user-components/social-login/social-login.component';
 
 const routes: Routes = [
     {

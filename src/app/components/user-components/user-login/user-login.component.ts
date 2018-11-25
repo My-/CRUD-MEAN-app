@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {LoginService} from '../../services/login.service';
-import {UserService} from '../../services/user.service';
+import {LoginService} from '../../../services/login.service';
+import {UserService} from '../../../services/user.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {LoggedUser} from '../../model/user';
+import {LoggedUser} from '../../../model/user';
 
 @Component({
     selector: 'app-user-login',

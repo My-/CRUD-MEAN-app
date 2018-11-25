@@ -12,8 +12,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
-import {MatPaginatorModule, MatSortModule, MatToolbarModule} from '@angular/material';
+import {MatCheckboxModule, MatPaginatorModule, MatSortModule, MatToolbarModule} from '@angular/material';
 
 
 
@@ -34,6 +35,8 @@ import {MatPaginatorModule, MatSortModule, MatToolbarModule} from '@angular/mate
         MatExpansionModule,
         MatStepperModule,
         MatTabsModule,
+        MatSidenavModule,
+        MatCheckboxModule,
     ],
     exports: [
         MatTableModule,
@@ -51,6 +54,8 @@ import {MatPaginatorModule, MatSortModule, MatToolbarModule} from '@angular/mate
         MatExpansionModule,
         MatStepperModule,
         MatTabsModule,
+        MatSidenavModule,
+        MatCheckboxModule,
     ]
 })
 

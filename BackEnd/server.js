@@ -29,7 +29,7 @@ app.use(cors({
 const authRoutes = require('./routes/auth-routs')
 app.use('/auth', authRoutes)
 
-// recipe routes
+// instructions routes
 const recipeRoutes = require('./routes/recipe-routs')
 app.use('/recipe', recipeRoutes)
 

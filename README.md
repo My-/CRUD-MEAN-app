@@ -29,7 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Express end points:
 
-`POST: /auth/localLogin` | login user | body.password body.username 
+`POST: /auth/localLogin` | login user | body.password body.username
 
 `GET: /user/`  | get user details
 
@@ -61,3 +61,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - () https://scotch.io/tutorials/javascript-promises-for-dummies
 - (Referencing another schema in Mongoose) https://stackoverflow.com/questions/18001478/referencing-another-schema-in-mongoose#18002078
 - (remove mongo document references) https://stackoverflow.com/a/11905116/5322506
+- (angular inter component comunication) http://jasonwatmore.com/post/2016/12/01/angular-2-communicating-between-components-with-observable-subject
+- (multy subscribers to Observable) https://stackoverflow.com/a/43644258/5322506

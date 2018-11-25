@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {HttpHeaders} from '@angular/common/http';
 
 import {LoggedUser, User} from '../model/user';
 
-import {Observable} from 'rxjs';
+import {Observable, Observer} from 'rxjs';
 import {throwError} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 
@@ -14,11 +15,29 @@ export class UserService {
     constructor(private _http: HttpClient) { }
 
     /**
-     * Get user from DB by it's ID.
-     * @param id - of the user we requesting
+     * Get user details from Local storage
      */
-    getByID(id: number): Observable<User> {
-        return Observable.create();
+    getUserDetailsLocalStorage(): Observable<User> {
+        return Observable.create((observer: Observer<User>) => {
+            observer.next(LoggedUser.get());
+        });
+    }
+
+    /**
+     * Get user details from DB by it's ID.
+     */
+    getUserDetailsDB(): Observable<User> {
+
+        const headers = new HttpHeaders()
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .set('Authorization', `Bearer ${LoggedUser.getToken().subscribe()}`)
+            .set('cache-control', 'no-cache');
+
+        return this._http.get(`$http://localhost:3000/user`,
+            {headers: headers})
+            .pipe(
+                map(val => <User>(val as any).user)
+            );
     }
 
     /**
@@ -49,15 +68,15 @@ export class UserService {
 
         // send post request to express server
         return this._http.post('http://localhost:3000/auth/localLogin', user)
-                .pipe(
-                    // log response
-                    tap(val => console.log(`...got ${JSON.stringify(val, null, 4)}`)),
-                    // save JWT to local storage
-                    tap(val => localStorage.setItem(LoggedUser.localStorageJWT, (val as any).token)),
-                    // map to User object
-                    map(val => <User>(val as any).user),
-                    // save logged user as saved user
-                    tap(val => LoggedUser.set(val)),
-                );
+            .pipe(
+                // log response
+                tap(val => console.log(`...got ${JSON.stringify(val, null, 4)}`)),
+                // save JWT to local storage
+                tap(val => localStorage.setItem(LoggedUser.localStorageJWT, (val as any).token)),
+                // map to User object
+                map(val => <User>(val as any).user),
+                // save logged user as saved user
+                tap(val => LoggedUser.set(val)),
+            );
     }
 }

@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
      * 1. Validate JWT
      *      true  -> set userID to id from JWT users id
      *      false -> set userID to null
-     * 2. Create recipe from request body with validated userID
+     * 2. Create instructions from request body with validated userID
      * 3. Save to DB
      * 4. Send back response.
      */
@@ -39,12 +39,11 @@ router.post('/', (req, res) => {
 
     /**
      * Creates recipe from request
-     * @param userID - id of the user who creates recipe
-     * @param recipe - recipe data
+     * @param userID - id of the user who creates instructions
+     * @param recipe - instructions data
      * @return new RecipeModel
      */
     function createRecipe({userID, recipe}) {
-        console.log('creating recipe')
         return new RecipeModel({
             User: userID,
             title: recipe.title,
@@ -62,7 +61,6 @@ router.post('/', (req, res) => {
      * @return {*}
      */
     function userAddRecipe({recipe}){
-        console.log('adding to user')
         if( !recipe.User ){
             console.log('anonymous recipe')
             return new Promise(resolve => resolve({userName: 'Anonymous', recipe:[recipe._id]}))
@@ -87,6 +85,17 @@ router.get('/', (req, res) => {
         })
         .then(recipe => res.json(200, {recipe}))
         .catch(err => res.json(400, {err}))
+})
+
+// get all recipes
+router.get('/all', (req, res) => {
+    RecipeModel.find()
+        .then(data => {
+            if( !data ){ throw 'No recipes are in DB.' }
+            return data
+        })
+        .then(recipes => res.status(200).json(recipes))
+        .catch(err => res.status(400).json({err}))
 })
 
 // Update.
@@ -145,10 +154,10 @@ router.delete('/', passport.authenticate('jwt', {session: false}), (req, res, ne
  * Verifies what recipe is belongs to user.
  * @param userID
  * @param recipeID
- * @return {Promise} - recipe with given id or error if not users recipe
+ * @return {Promise} - instructions with given id or error if not users instructions
  */
 function userRecipe({userID, recipeID}){
-    if( !recipeID ){ return Promise.reject('Missing recipe id parameter.')}
+    if( !recipeID ){ return Promise.reject('Missing instructions id parameter.')}
 
     return RecipeModel.findById(recipeID)
         .then( recipe => {

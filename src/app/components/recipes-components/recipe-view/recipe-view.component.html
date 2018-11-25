@@ -7,7 +7,7 @@
         <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>{{recipe.title}}</mat-card-title>
-            <mat-card-subtitle>{{recipe.recipe.substring(0, 15)}}...</mat-card-subtitle>
+            <mat-card-subtitle>{{recipe.instructions.substring(0, 15)}}...</mat-card-subtitle>
         </mat-card-header>
 
         <!--Picture-->
@@ -18,7 +18,7 @@
         <!--Recipe & ingredients-->
         <mat-card-content>
             <!--Recipe-->
-            <p>{{recipe.recipe}}</p>
+            <p>{{recipe.instructions}}</p>
 
             <!--Collapse/Expandable-->
             <mat-accordion class="example-headers-align">
@@ -65,7 +65,6 @@
         <mat-card-actions>
             <!--TODO: maket them work-->
             <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
         </mat-card-actions>
 
     </mat-card>

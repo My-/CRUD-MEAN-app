@@ -60,7 +60,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next
 
     /**
      * Records comment id to Recipe document.
-     * Comment on recipe.
+     * Comment on instructions.
      * @param comment
      * @return {Promise}
      */

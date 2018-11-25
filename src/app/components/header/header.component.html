@@ -1,0 +1,43 @@
+<div class="component">
+    <p class="text-highlight">header works!</p>
+
+
+    <div class="example-button-row">
+
+        <!--Login/Register button-->
+        <button mat-raised-button
+                (click)="toggle()"
+        ><span *ngIf="opened;then open else close">here is ignored</span>
+            <ng-template #open><mat-icon>first_page</mat-icon></ng-template>
+            <ng-template #close><mat-icon>last_page</mat-icon></ng-template>
+        </button>
+
+        <!--Login/Register button-->
+        <button mat-raised-button
+                (click)="openDialog()"
+        ><mat-icon>fingerprint</mat-icon>
+        </button>
+
+        <!--Recipe page button-->
+        <a class="nav-link"
+           [routerLink]="['/recipe/recipe']"
+           routerLinkActive="active"
+        >
+            <button mat-raised-button
+            ><mat-icon>fastfood</mat-icon>
+            </button>
+        </a>
+
+        <!--Profile info button-->
+        <a class="nav-link"
+           [routerLink]="['/user/profile']"
+           routerLinkActive="active"
+        >
+            <button mat-raised-button
+            ><mat-icon>person</mat-icon>
+            </button>
+        </a>
+
+    </div>
+
+</div>

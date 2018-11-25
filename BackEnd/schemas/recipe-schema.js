@@ -37,7 +37,7 @@ const RecipeSchema = new Schema({
 
 // // https://stackoverflow.com/a/11905116/5322506
 // RecipeSchema.pre('remove', function(next){
-//     console.log(`Deleting from user ${this.User} recipe ${this._id}`)
+//     console.log(`Deleting from user ${this.User} instructions ${this._id}`)
 //     // Remove all the assignment docs that reference the removed person.
 //     this.model('User').update({_id: this.User}, {$pull: {recipes:  this._id }}, next);
 // });

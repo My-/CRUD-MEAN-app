@@ -1,0 +1,51 @@
+<div class="component">
+    <p class="text-highlight">body</p>
+
+
+    <!--<mat-drawer-container class="example-container" autosize>-->
+
+        <!--<mat-drawer #drawer class="example-sidenav" mode="side">-->
+            <!--<p>Auto-resizing sidenav</p>-->
+            <!--<p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>-->
+            <!--<button (click)="showFiller = !showFiller" mat-raised-button>-->
+                <!--Toggle extra text-->
+            <!--</button>-->
+        <!--</mat-drawer>-->
+
+        <!--<div class="example-sidenav-content">-->
+            <!--<button type="button" mat-button (click)="drawer.toggle()">-->
+                <!--Toggle sidenav-->
+            <!--</button>-->
+        <!--</div>-->
+
+    <mat-sidenav-container>
+
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" >
+        Sidenav content
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
+        <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
+
+
+
+
+        <!--RouteLink components will be loaded there-->
+        <div class="continer-fluid">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+
+    </mat-sidenav-content>
+
+
+    </mat-sidenav-container>
+
+    <!--</mat-drawer-container>-->
+
+
+</div>

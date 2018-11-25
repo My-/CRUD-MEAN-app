@@ -2,28 +2,34 @@ import {Ingredient} from './ingredient';
 import {Allergy} from './allergy';
 
 import {RecipeService} from '../services/recipe.service';
-// export {RecipeService} from '../services/recipe.service';
+import {User} from './user';
+// export {RecipeService} from '../services/instructions.service';
 
 
 
 export interface Recipe {
-    userID: number;
+    User?: User;
     title: string;
-    allergies: Allergy[];
-    takesTime: number;
-    pictures: string[];
-    ingredients: Ingredient[];
-    recipe: string;
+    takesTime?: number;
+    pictures?: string[];
+    ingredients?: Ingredient[];
+    // allergies: Allergy[];
+    instructions: string;
+    comments?: Comment[];
+    created?: string;
 }
 
 
 export const RECIPES: Recipe[] = [
     {
-        userID: 0,
+        User: {
+            id: '0',
+            userName: 'Jonas',
+        },
         title: 'Egg breakfast',
-        allergies: [
-            {name: 'Egg allergy', uri: 'https://en.wikipedia.org/wiki/Egg_allergy'}
-        ],
+        // allergies: [
+        //     {name: 'Egg allergy', uri: 'https://en.wikipedia.org/wiki/Egg_allergy'}
+        // ],
         takesTime: 10,
         pictures: [
             'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Eggs-as-food.jpg/1200px-Eggs-as-food.jpg',
@@ -33,11 +39,14 @@ export const RECIPES: Recipe[] = [
             {name: 'Bread', amount: 100, calories: 267},
             {name: 'Butter', amount: 100, calories: 717},
         ],
-        recipe: 'Man up, take pan and cook an egg :)',
+        instructions: 'Man up, take pan and cook an egg :)',
     }, {
-        userID: 1,
+        User: {
+            id: '1',
+            userName: 'Benas',
+        },
         title: 'Simple sandwich',
-        allergies: [],
+        // allergies: [],
         takesTime: 5,
         pictures: [
             'https://www.wikihow.com/images/2/23/Make-a-Fried-Bologna-Sandwich-Intro.jpg',
@@ -47,7 +56,7 @@ export const RECIPES: Recipe[] = [
             {name: 'Butter', amount: 100, calories: 717},
             {name: 'Pork', amount: 100, calories: 518},
         ],
-        recipe: 'Ask woman :)',
+        instructions: 'Ask woman :)',
     },
 
 

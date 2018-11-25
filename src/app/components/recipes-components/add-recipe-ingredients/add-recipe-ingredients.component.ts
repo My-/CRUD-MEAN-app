@@ -3,7 +3,7 @@ import {MatSort, MatTableDataSource} from '@angular/material';
 import {NgForm} from '@angular/forms';
 import {FormControl} from '@angular/forms';
 
-import {Ingredient, INGREDIENTS} from '../../model/ingredient';
+import {Ingredient, INGREDIENTS} from '../../../model/ingredient';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, NgForm} from '@angular/forms';
-import {RecipeService} from '../../services/recipe.service';
-import {Recipe} from '../../model/recipe';
+import {RecipeService} from '../../../services/recipe.service';
+import {Recipe} from '../../../model/recipe';
 import {AddRecipeIngredientsComponent} from '../add-recipe-ingredients/add-recipe-ingredients.component';
 
 
@@ -27,13 +27,13 @@ export class AddRecipeComponent implements OnInit {
         console.log(form.value);
 
         const userRecipe: Recipe = {
-            userID: 0,
+            // User: ,
             title: form.value.title,
-            allergies: [],
+            // allergies: [],
             takesTime: 0,
             pictures: [],
             ingredients: this.recipeIngredients.ingredients,
-            recipe: form.value.recipe,
+            instructions: form.value.instructions,
         };
 
         this._recipeDB.add(userRecipe)

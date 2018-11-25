@@ -2,7 +2,7 @@
 <p class="text-highlight">add-recipe</p>
     <button
         mat-raised-button
-        (click)="onLoadPredifinedData()">Save Recipe</button>
+        (click)="onLoadPredifinedData()">upload def recipes Recipe</button>
 
     <!--Component responsible for image uploading-->
     <app-add-recipe-image></app-add-recipe-image>
@@ -33,12 +33,12 @@
             <textarea matInput
                       placeholder="Recipe"
                       rows="5"
-                      name="recipe"
+                      name="instructions"
                       ngModel
                       required
-                      #recipe="ngModel"
+                      #instructions="ngModel"
             ></textarea>
-            <mat-error *ngIf="recipe.invalid">Please enter a recipe.</mat-error>
+            <mat-error *ngIf="instructions.invalid">Please enter a recipe.</mat-error>
         </mat-form-field>
 
 

@@ -1,13 +1,19 @@
 /**
  * Interface for creating users
  */
+import {Recipe} from './recipe';
+import {Observable, Observer} from 'rxjs';
+
 export interface User {
-    id: number;
+    id: string;
     userName: string;
-    loginMethod: string;
-    password?: string;
+    loginMethod?: string;
+    password?: string;  // if login with FB, google no need password
     avatar?: string;
     gender?: UserGender.OTHER;
+    recipes?: Recipe[];
+    comments?: Comment[];
+    created?: string;
 }
 
 /**
@@ -40,4 +46,11 @@ export abstract class LoggedUser {
      * @param user - to be set as logged user
      */
     static set = (user: User): User => LoggedUser.user = user;
+
+    /**
+     * get JWT token from local storage
+     */
+    static getToken = (): Observable<string> =>
+        Observable.create((observer: Observer<string>) =>
+            observer.next(localStorage.getItem(LoggedUser.localStorageJWT)))
 }

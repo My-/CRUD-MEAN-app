@@ -1,6 +1,13 @@
 <div class="component">
     <p class="text-highlight">recipe component</p>
 
+    <input matInput
+           placeholder="Recipe"
+           type="text"
+           value={{searchRecipe}}
+    />
+    <button mat-raised-button
+            (click)="searchYummily()">Yummly</button>
 
     <!--Recipe View-->
     <div *ngFor="let recipe of recipes" >

@@ -27,7 +27,7 @@ import {HeaderComponent} from './components/header/header.component';
 import {BodyComponent} from './components/body/body.component';
 import {YummlyService} from './services/yummly.service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {SideNavService} from './model/side-nav';
+import {SideNavService} from './services/side-nav.service';
 
 @NgModule({
     declarations: [

@@ -4,24 +4,31 @@
 
     <div class="example-button-row">
 
-        <!--Login/Register button-->
-        <button mat-raised-button
-                (click)="toggle()"
-        ><span *ngIf="opened;then open else close">here is ignored</span>
-            <ng-template #open><mat-icon>first_page</mat-icon></ng-template>
-            <ng-template #close><mat-icon>last_page</mat-icon></ng-template>
-        </button>
+        <!--Side nav toggle-->
+        <ng-container *ngIf="userLogged">
+            <button mat-raised-button
+                    (click)="toggle()"
+                    matTooltip="Open side Navigation"
+            ><span *ngIf="opened;then open else close">here is ignored</span>
+                <ng-template #open><mat-icon>first_page</mat-icon></ng-template>
+                <ng-template #close><mat-icon>last_page</mat-icon></ng-template>
+            </button>
+        </ng-container>
 
         <!--Login/Register button-->
-        <button mat-raised-button
-                (click)="openDialog()"
-        ><mat-icon>fingerprint</mat-icon>
-        </button>
+        <ng-container *ngIf="!userLogged">
+            <button mat-raised-button
+                    (click)="openDialog()"
+                    matTooltip="Login / Register"
+            ><mat-icon>fingerprint</mat-icon>
+            </button>
+        </ng-container>
 
         <!--Recipe page button-->
         <a class="nav-link"
            [routerLink]="['/recipe/recipe']"
            routerLinkActive="active"
+           matTooltip="Show Recipes"
         >
             <button mat-raised-button
             ><mat-icon>fastfood</mat-icon>

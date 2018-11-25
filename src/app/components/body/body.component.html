@@ -21,12 +21,18 @@
     <mat-sidenav-container>
 
     <mat-sidenav #sidenav mode="side" [(opened)]="opened" >
-        Sidenav content
+        <!--Sidenav content-->
+
+        <button mat-raised-button
+                (click)="logOut()"
+                matTooltip="Logout"
+        ><mat-icon>eject</mat-icon>
+        </button>
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
-        <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
+        <!--<p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>-->
+        <!--<p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>-->
 
 
 

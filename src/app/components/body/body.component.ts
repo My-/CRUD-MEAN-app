@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {SideNavService} from '../../model/side-nav';
+import {SideNavService} from '../../services/side-nav.service';
 import {Subscription} from 'rxjs';
+import {UserService} from '../../services/user.service';
 
 @Component({
     selector: 'app-body',
@@ -10,15 +11,26 @@ import {Subscription} from 'rxjs';
 })
 export class BodyComponent implements OnDestroy {
     opened: boolean;
-    subscription: Subscription;
+    subSideNav: Subscription;
+    userLogged: boolean;
+    subUserLog: Subscription;
 
-    constructor(private _sideNavService: SideNavService) {
-        this.subscription = this._sideNavService.getState().subscribe(state => { this.opened = state; });
+    constructor(private _sideNavService: SideNavService,
+                private _userService: UserService,
+                ) {
+        this.subSideNav = this._sideNavService.getState().subscribe(state => { this.opened = state; });
+        this.subUserLog = this._userService.getState().subscribe(state => { this.userLogged = state; });
     }
 
     ngOnDestroy() {
         // unsubscribe to ensure no memory leaks
-        this.subscription.unsubscribe();
+        this.subSideNav.unsubscribe();
+        this.subUserLog.unsubscribe();
+    }
+
+    logOut() {
+        this._userService.logOut();
+        this.opened = false;
     }
 
 }

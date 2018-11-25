@@ -48,9 +48,17 @@ export abstract class LoggedUser {
     static set = (user: User): User => LoggedUser.user = user;
 
     /**
+     * removes
+     */
+    static remove() {
+        LoggedUser.user = null;
+        localStorage.removeItem(LoggedUser.localStorageJWT);
+    }
+
+    /**
      * get JWT token from local storage
      */
     static getToken = (): Observable<string> =>
         Observable.create((observer: Observer<string>) =>
-            observer.next(localStorage.getItem(LoggedUser.localStorageJWT)))
+            observer.next(localStorage.getItem(LoggedUser.localStorageJWT)));
 }

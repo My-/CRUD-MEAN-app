@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SideNav } from '../../model/side-nav';
+import { SideNav } from '../side-nav.service';
 
 describe('SideNav', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

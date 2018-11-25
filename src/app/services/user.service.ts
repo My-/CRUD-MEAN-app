@@ -4,15 +4,28 @@ import {HttpHeaders} from '@angular/common/http';
 
 import {LoggedUser, User} from '../model/user';
 
-import {Observable, Observer} from 'rxjs';
-import {throwError} from 'rxjs';
+import {Observable, Observer, Subject, throwError} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 
 export class UserService {
+    private loggedIn = false;
+    private subject = new Subject<boolean>();
 
     constructor(private _http: HttpClient) { }
+
+    getState(): Observable<any> {
+        return this.subject.asObservable();
+    }
+
+    logOut(): void {
+        this.loggedIn = false;
+        this.subject.next(this.loggedIn);
+        LoggedUser.remove();
+        console.log('Logged out');
+    }
 
     /**
      * Get user details from Local storage
@@ -52,7 +65,7 @@ export class UserService {
      * Logs user in.
      *      - post user to express,
      *          - express validates user,
-     *          - if valid, express sends back user + JWT,
+     *          - if valid, express sends back {user:{}, JWT: 'token'},
      *      - saves JWT to local storage,
      *      - saves user to LoggedUser
      *
@@ -76,7 +89,18 @@ export class UserService {
                 // map to User object
                 map(val => <User>(val as any).user),
                 // save logged user as saved user
-                tap(val => LoggedUser.set(val)),
+                tap(val => {
+                    LoggedUser.set(val);
+                    this.loggedIn = true;
+                    this.subject.next(this.loggedIn);
+                }),
             );
+    }
+
+    /**
+     * Gets logged user. If here in no logged user returns null
+     */
+    getLoggedUser(): User {
+        return LoggedUser.get();
     }
 }

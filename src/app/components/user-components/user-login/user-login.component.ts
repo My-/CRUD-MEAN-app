@@ -3,8 +3,9 @@ import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../../services/login.service';
 import {UserService} from '../../../services/user.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import {LoggedUser} from '../../../model/user';
+import {LoginComponent} from '../login/login.component';
 
 @Component({
     selector: 'app-user-login',
@@ -40,6 +41,8 @@ export class UserLoginComponent implements OnInit {
     constructor(private _router: Router,
                 private _loginService: LoginService,
                 private _userService: UserService,
+                private _dialogRef: MatDialogRef<LoginComponent>,
+                private _snackBar: MatSnackBar,
                 ) { }
 
     ngOnInit() { }
@@ -48,9 +51,11 @@ export class UserLoginComponent implements OnInit {
         this._router.navigate(['/register']);
     }
 
+    /**
+     * Logs user using user service.
+     */
     login() {
         if (!this.loginForm.valid) {
-
             console.log(`Invalid Login: ${JSON.stringify(this.loginForm.value)}`);
             return;
         }
@@ -61,18 +66,21 @@ export class UserLoginComponent implements OnInit {
             password: this.loginForm.value.password,
         };
 
-        this._userService.login({user}).subscribe(val => {
-            console.log('loged in');
-            console.log(val);
-            console.log();
-            console.log('Logged User: ');
-            console.log(LoggedUser.get());
-        });
+        this._userService.login({user}).subscribe(
+            val => {
+                this._snackBar.open(`Hi ${val.userName}    🍽️`, 'OK', {duration: 3000});
+                this.closeDialog();
+            },
+            err => {
+                console.log('User login error: '); console.log(err);
+                this._snackBar.open(`Couldn't log you in. ${err.error.message}`, 'OK', {
+                    duration: 3000,
+                });
+            });
     }
 
-    logout() {
-        this._loginService.logout().subscribe(res => console.log(res));
-
+    closeDialog(): void {
+        this._dialogRef.close();
     }
 
 }

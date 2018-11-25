@@ -1,8 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {LoginComponent} from '../user-components/login/login.component';
-import {SideNavService} from '../../model/side-nav';
+import {SideNavService} from '../../services/side-nav.service';
 import {Subscription} from 'rxjs';
+import {LoggedUser} from '../../model/user';
+import {UserService} from '../../services/user.service';
 
 @Component({
     selector: 'app-header',
@@ -11,20 +13,36 @@ import {Subscription} from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
     opened: boolean;
-    subscription: Subscription;
+    subSideNav: Subscription;
+    userLogged: boolean;
+    subUserLog: Subscription;
 
     constructor(private _dialog: MatDialog,
                 private _sideNavService: SideNavService,
-                ) {
-        this.subscription = this._sideNavService.getState().subscribe(state => { this.opened = state; });
+                private _userService: UserService,
+    ) {
+        // subscribe to side nav service to be able toggle "brothers" side nav (inner sibling communication)
+        this.subSideNav = this._sideNavService.getState().subscribe(state => { this.opened = state; });
+        // subscribe to user logged variable
+        this.subUserLog = this._userService.getState().subscribe(state => { this.userLogged = state; });
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        // check if user is logged. if is: don't show login button
+        this.userLogged = !!LoggedUser.get();
+        console.log('user logged: ' + this.userLogged);
+    }
 
+    /**
+     * Toggle side navigation
+     */
     toggle(): void {
         this.opened = this._sideNavService.toggle();
     }
 
+    /**
+     * Open Login dialog popup
+     */
     openDialog(): void {
         const dialogRef = this._dialog.open(LoginComponent, {
             // width: '250px',              // popup dialog width
@@ -37,7 +55,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         // unsubscribe to ensure no memory leaks
-        this.subscription.unsubscribe();
+        this.subSideNav.unsubscribe();
+        this.subUserLog.unsubscribe();
     }
 
 

@@ -8,6 +8,7 @@ import {User} from './user';
 
 
 export interface Recipe {
+    _id?: string;
     User?: User;
     title: string;
     takesTime?: number;

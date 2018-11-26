@@ -19,7 +19,7 @@ export class BodyComponent implements OnDestroy {
                 private _userService: UserService,
                 ) {
         this.subSideNav = this._sideNavService.getState().subscribe(state => { this.opened = state; });
-        this.subUserLog = this._userService.getState().subscribe(state => { this.userLogged = state; });
+        this.subUserLog = this._userService.getLoginState().subscribe(state => { this.userLogged = state; });
     }
 
     ngOnDestroy() {
@@ -29,8 +29,8 @@ export class BodyComponent implements OnDestroy {
     }
 
     logOut() {
-        this._userService.logOut();
         this.opened = false;
+        this._userService.logOut();
     }
 
 }

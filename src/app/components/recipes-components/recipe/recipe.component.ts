@@ -3,6 +3,7 @@ import {Ingredient} from '../../../model/ingredient';
 import {Recipe} from '../../../model/recipe';
 import {RecipeService} from '../../../services/recipe.service';
 import {YummlyService} from '../../../services/yummly.service';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -11,11 +12,16 @@ import {YummlyService} from '../../../services/yummly.service';
     styleUrls: ['./recipe.component.css']
 })
 export class RecipeComponent implements OnInit {
-    recipes: Recipe[];
+    recipes: Recipe[] = [];
+    subRecipes: Subscription;
     searchRecipe: string;
 
     constructor(private _recipeService: RecipeService,
-                private _yummlyService: YummlyService) {
+                private _yummlyService: YummlyService,
+                ) {
+        // subscribe to service recipe variable
+        this.subRecipes = this._recipeService.getRecipesfromSubject().subscribe(state => { this.recipes = state; });
+
         // pull data from database
         this._recipeService.get().subscribe(
             data => this.recipes = data,

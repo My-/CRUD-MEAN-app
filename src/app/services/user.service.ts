@@ -7,23 +7,36 @@ import {LoggedUser, User} from '../model/user';
 import {Observable, Observer, Subject, throwError} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material';
+import {Recipe} from '../model/recipe';
 
 @Injectable()
 
 export class UserService {
     private loggedIn = false;
     private subject = new Subject<boolean>();
+    private user: User;
+    private userSubject = new Subject<User>();
 
     constructor(private _http: HttpClient) { }
 
-    getState(): Observable<any> {
+    getLoginState(): Observable<boolean> {
         return this.subject.asObservable();
+    }
+
+    getUserState(): Observable<User> {
+        return this.userSubject.asObservable();
     }
 
     logOut(): void {
         this.loggedIn = false;
         this.subject.next(this.loggedIn);
         LoggedUser.remove();
+        this.user = new class implements User {
+            id: '';
+            loginMethod: '';
+            userName: '';
+        };
+        this.userSubject.next(this.user);
         console.log('Logged out');
     }
 
@@ -36,6 +49,8 @@ export class UserService {
         });
     }
 
+
+
     /**
      * Get user details from DB by it's ID.
      */
@@ -43,7 +58,7 @@ export class UserService {
 
         const headers = new HttpHeaders()
             .set('Content-Type', 'application/x-www-form-urlencoded')
-            .set('Authorization', `Bearer ${LoggedUser.getToken().subscribe()}`)
+            .set('Authorization', `Bearer ${LoggedUser.getToken()}`)
             .set('cache-control', 'no-cache');
 
         return this._http.get(`$http://localhost:3000/user`,
@@ -93,6 +108,8 @@ export class UserService {
                     LoggedUser.set(val);
                     this.loggedIn = true;
                     this.subject.next(this.loggedIn);
+                    this.user = LoggedUser.get();
+                    this.userSubject.next(this.user);
                 }),
             );
     }

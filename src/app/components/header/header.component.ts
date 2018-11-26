@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         // subscribe to side nav service to be able toggle "brothers" side nav (inner sibling communication)
         this.subSideNav = this._sideNavService.getState().subscribe(state => { this.opened = state; });
         // subscribe to user logged variable
-        this.subUserLog = this._userService.getState().subscribe(state => { this.userLogged = state; });
+        this.subUserLog = this._userService.getLoginState().subscribe(state => { this.userLogged = state; });
     }
 
     ngOnInit() {

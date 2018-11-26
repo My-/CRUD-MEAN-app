@@ -58,7 +58,5 @@ export abstract class LoggedUser {
     /**
      * get JWT token from local storage
      */
-    static getToken = (): Observable<string> =>
-        Observable.create((observer: Observer<string>) =>
-            observer.next(localStorage.getItem(LoggedUser.localStorageJWT)));
+    static getToken = (): string => localStorage.getItem(LoggedUser.localStorageJWT);
 }

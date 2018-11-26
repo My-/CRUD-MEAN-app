@@ -5,6 +5,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.h600 {
+    min-height: 600px;
+}
+
 .component {
     border:3px solid black;
     color: #2ccd51;

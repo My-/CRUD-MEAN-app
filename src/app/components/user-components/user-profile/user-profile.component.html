@@ -1,9 +1,21 @@
 <div class="component">
     <p class="text-highlight">user-profile works!</p>
 
-    <H2>User: </H2>
-    <span *ngIf="currentUser">{{currentUser.userName}}</span>
-    <span *ngIf="!currentUser">No user</span>
+    <img *ngIf="currentUser.avatar" src={{currentUser.avatar}}>
+
+    <H2 *ngIf="currentUser.userName">Hi {{currentUser.userName}} </H2>
+
+    <button *ngIf="currentUser.recipes"
+            mat-raised-button
+            (click)="showRecipes()"
+    > Show recipes: {{currentUser.recipes.length}}</button>
+
+    <button *ngIf="currentUser.comments"
+            mat-raised-button
+            (click)="showComments()"
+    > Show comments: {{currentUser.comments.length}}</button>
+
+    <p *ngIf="currentUser.created">Member since: {{currentUser.created}}</p>
 
 </div>
 

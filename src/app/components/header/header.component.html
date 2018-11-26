@@ -37,11 +37,12 @@
 
         <!--Profile info button-->
         <a class="nav-link"
-           [routerLink]="['/user/profile']"
+           [routerLink]="['/recipe/createRecipe']"
            routerLinkActive="active"
         >
             <button mat-raised-button
-            ><mat-icon>person</mat-icon>
+                    matTooltip="Add Recipe"
+            ><mat-icon>plus_one</mat-icon>
             </button>
         </a>
 

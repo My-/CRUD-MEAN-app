@@ -3,6 +3,7 @@ import {FormControl, FormGroup, NgForm} from '@angular/forms';
 import {RecipeService} from '../../../services/recipe.service';
 import {Recipe} from '../../../model/recipe';
 import {AddRecipeIngredientsComponent} from '../add-recipe-ingredients/add-recipe-ingredients.component';
+import {AddRecipeImageComponent} from '../add-recipe-image/add-recipe-image.component';
 
 
 @Component({
@@ -17,6 +18,7 @@ import {AddRecipeIngredientsComponent} from '../add-recipe-ingredients/add-recip
 export class AddRecipeComponent implements OnInit {
 
     @ViewChild(AddRecipeIngredientsComponent) recipeIngredients: AddRecipeIngredientsComponent;
+    @ViewChild(AddRecipeImageComponent) image: AddRecipeImageComponent;
 
     constructor(private _recipeDB: RecipeService) {  }
 
@@ -25,16 +27,24 @@ export class AddRecipeComponent implements OnInit {
 
     onAddRecipe(form: NgForm) {
         console.log(form.value);
+        const imgArr = [];
+        imgArr.push(this.image.imageURI);
+
+        console.log(this.image.imageURI);
+        console.log(imgArr);
 
         const userRecipe: Recipe = {
             // User: ,
             title: form.value.title,
             // allergies: [],
             takesTime: 0,
-            pictures: [],
+            pictures: imgArr,
             ingredients: this.recipeIngredients.ingredients,
             instructions: form.value.instructions,
         };
+
+        console.log('sending');
+        console.log(userRecipe);
 
         this._recipeDB.add(userRecipe)
             .subscribe(res => {

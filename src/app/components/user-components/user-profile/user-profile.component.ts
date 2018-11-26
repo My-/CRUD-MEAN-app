@@ -1,6 +1,9 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service';
 import {LoggedUser, User} from '../../../model/user';
+import {Subscription} from 'rxjs';
+import {Recipe} from '../../../model/recipe';
+import {RecipeService} from '../../../services/recipe.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -9,16 +12,27 @@ import {LoggedUser, User} from '../../../model/user';
 })
 export class UserProfileComponent implements OnInit {
 
-    currentUser: User;
+    currentUser: User = new class implements User {
+        id: '';
+        loginMethod: '';
+        userName: '';
+    };
+    subUserLog: Subscription;
 
-    constructor() { }
-
-    ngOnInit() {
-        this.currentUser = LoggedUser.get();
+    constructor(private _userService: UserService,
+                private _recipeService: RecipeService,
+                ) {
+        this.subUserLog = this._userService.getUserState().subscribe(state => { this.currentUser = state; });
     }
 
+    ngOnInit() { }
 
 
+    showRecipes() {
+        this._recipeService.getUserRecipes().subscribe();
+    }
 
+    showComments() {
 
+    }
 }

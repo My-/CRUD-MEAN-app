@@ -22,6 +22,7 @@ router.post('/', (req, res) => {
      * 3. Save to DB
      * 4. Send back response.
      */
+
     Promise.resolve(req)
         // validate JWT
         .then(data => ExtractJwt.fromAuthHeaderAsBearerToken()(data))
@@ -44,6 +45,7 @@ router.post('/', (req, res) => {
      * @return new RecipeModel
      */
     function createRecipe({userID, recipe}) {
+        console.log(recipe)
         return new RecipeModel({
             User: userID,
             title: recipe.title,
@@ -63,7 +65,7 @@ router.post('/', (req, res) => {
     function userAddRecipe({recipe}){
         if( !recipe.User ){
             console.log('anonymous recipe')
-            return new Promise(resolve => resolve({userName: 'Anonymous', recipe:[recipe._id]}))
+            return new Promise(resolve => resolve({userName: 'Anonymous', recipe}))
         }
 
         return UserModel.findByIdAndUpdate(
@@ -71,7 +73,7 @@ router.post('/', (req, res) => {
             {$push: {recipes: recipe._id}},
             {safe: true, new : true},
         )
-            .then(user => {console.log(`Recipe recorded. ${user.userName} recipes: ${user.recipes} `); return user})
+            .then(user => {console.log(`Recipe recorded. ${user.userName} recipes: ${user.recipes} `); return recipe})
     }
 
 })

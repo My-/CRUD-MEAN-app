@@ -31,7 +31,7 @@ export class RecipeService {
 
         console.log(`POST: ${link}`);
 
-        return this._http.post(link, userRecipe, {headers})
+        return this._http.post(link, userRecipe) // , {headers})
             .pipe(
                 tap(val => this._snackBar.open(`Recipe ${(val as any).title} saved`, 'OK', {
                     duration: 2000,

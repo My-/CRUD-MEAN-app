@@ -32,7 +32,7 @@ export class UserService {
         this.subject.next(this.loggedIn);
         LoggedUser.remove();
         this.user = new class implements User {
-            id: '';
+            _id: '';
             loginMethod: '';
             userName: '';
         };
@@ -47,6 +47,11 @@ export class UserService {
         return Observable.create((observer: Observer<User>) => {
             observer.next(LoggedUser.get());
         });
+    }
+
+
+    updateDB(user: User){
+        this._http.put('/')
     }
 
 

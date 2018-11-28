@@ -5,7 +5,7 @@ import {Recipe} from './recipe';
 import {Observable, Observer} from 'rxjs';
 
 export interface User {
-    id: string;
+    _id: string;
     userName: string;
     loginMethod?: string;
     password?: string;  // if login with FB, google no need password

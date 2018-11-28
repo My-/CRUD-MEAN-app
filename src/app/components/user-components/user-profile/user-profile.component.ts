@@ -13,7 +13,7 @@ import {RecipeService} from '../../../services/recipe.service';
 export class UserProfileComponent implements OnInit {
 
     currentUser: User = new class implements User {
-        id: '';
+        _id: '';
         loginMethod: '';
         userName: '';
     };

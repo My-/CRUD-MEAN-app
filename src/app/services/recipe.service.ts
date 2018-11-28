@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Recipe, RECIPES} from '../model/recipe';
-import {Observable, Subject} from 'rxjs';
+import {Observable, Observer, Subject} from 'rxjs';
 import {tap, map} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material';
 import {LoggedUser} from '../model/user';
@@ -14,12 +14,41 @@ export class RecipeService {
 
     constructor(private _http: HttpClient,
                 private _snackBar: MatSnackBar,
-                ) {
+    ) {
 
     }
 
-    getRecipesfromSubject(): Observable<Recipe[]> {
+
+    getRecipesFromSubject(): Observable<Recipe[]> {
         return this.subject.asObservable();
+    }
+
+    /*
+    Create - POST
+     */
+
+    /**
+     * Loads all data from const array RECIPES to DB.
+     * Use just for testing/initial data purposes.
+     */
+    savePredefinedDataToDB() {
+        const link = `http://localhost:3000/recipe`;
+
+        console.log('\nLoading predefined data to DB...');
+        console.log(`..POST: ${link}..`);
+
+        RECIPES.forEach(recipe => {
+            // console.log(`   ..data: ${JSON.stringify(recipe, null, 4)}`);
+
+            this._http.post('http://localhost:3000/recipe', recipe)
+                .pipe(
+                    tap(val => console.log(`    ${val ? '...saved ("' + (val as any).title + '")' : 'ERROR: DB didn\'t responded back!'}`)),
+                )
+                .subscribe(
+                    () => console.log('All saved!'),
+                    err => console.log(err)
+                );
+        });
     }
 
     add(userRecipe: Recipe): Observable<any> {
@@ -40,6 +69,11 @@ export class RecipeService {
             );
         // return Observable.create(sub => sub.next(userRecipe));
     }
+
+
+    /*
+        Read - GET
+     */
 
     getUserRecipes(): Observable<Recipe[]> {
         const link = `http://localhost:3000/user/recipes`;
@@ -73,31 +107,41 @@ export class RecipeService {
         );
     }
 
-    /**
-     * Loads all data from const array RECIPES to DB.
-     * Use just for testing/initial data purposes.
+
+    /*
+        Update - PUT
      */
-    savePredefinedDataToDB() {
-        const link = `http://localhost:3000/recipe`;
 
-        console.log('\nLoading predefined data to DB...');
-        console.log(`..POST: ${link}..`);
+    /**
+     * Update recipe in God Mode.
+     * @param recipe to be updated.
+     */
+    updateDB_GM(recipe: Recipe): Observable<string> {
+        const link = `http://localhost:3000/recipe/godmode`;
+        console.log(`PUT: ${link}`);
+        const body: any = recipe;
+        const loggedUser = LoggedUser.get();
 
-        RECIPES.forEach(recipe => {
-            // console.log(`   ..data: ${JSON.stringify(recipe, null, 4)}`);
+        if (loggedUser) { body.User = loggedUser._id; }
+        else {
+            this._snackBar.open('You need to login before claiming recipe');
+            return;
+        }
 
-            this._http.post('http://localhost:3000/recipe', recipe)
-                .pipe(
-                    tap(val => console.log(`    ${val ? '...saved ("' + (val as any).title + '")' : 'ERROR: DB didn\'t responded back!'}`)),
-                )
-                .subscribe(
-                    () => console.log('All saved!'),
-                    err => console.log(err)
-                );
-        });
+        console.log('user:');
+        console.log(LoggedUser.get());
+        console.log(' sending body:');
+        console.log(body);
+
+        this._http.put(`${link}`, body).subscribe(data => this._snackBar.open('recipe claimed'));
     }
 
-    delete(recipe: Recipe) {
+
+    /*
+        Delete - DELETE
+     */
+
+    deleteFromDB(recipe: Recipe) {
         const link = `http://localhost:3000/recipe`;
         console.log(`DELETE: ${link}`);
 

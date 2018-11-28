@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from '../../../model/recipe';
 import {RecipeService} from '../../../services/recipe.service';
+import {UserService} from '../../../services/user.service';
 
 @Component({
     selector: 'app-recipe-view',
@@ -13,11 +14,18 @@ export class RecipeViewComponent implements OnInit {
 
     displayedColumns: string[] = ['name', 'amount'];
 
-    constructor(private _recipeDB: RecipeService) { }
+    constructor(private _recipeDB: RecipeService,
+                private _userService: UserService,
+                ) { }
 
     ngOnInit() { }
 
     deleteRecipe() {
-        this._recipeDB.delete(this.recipe);
+        this._recipeDB.deleteFromDB(this.recipe);
+    }
+
+    claimOwnership() {
+        this._recipeDB.updateDB_GM(this.recipe);
+        this._userService.
     }
 }

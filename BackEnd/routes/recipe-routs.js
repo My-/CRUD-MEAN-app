@@ -100,10 +100,39 @@ router.get('/all', (req, res) => {
         .catch(err => res.status(400).json({err}))
 })
 
-// Update.
+// Update. Authenticated.
 router.put('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+
+    // console.log('in PUT: /recipes/')
+    // console.log(req.body)
+
     userRecipe({userID: req.user.id, recipeID: req.query.recipeID})
         .then(recipeID => updateRecipe({recipeID, body: req.body}))
+        .then(it => res.status(200).json({res: it}))
+        .catch(err => res.status(400).json({err}))
+
+    /**
+     * Updates recipe with given id with given body parameters
+     * @param recipeID
+     * @param body
+     * @return {Query}
+     */
+    function updateRecipe({recipeID, body}){
+        return RecipeModel.findByIdAndUpdate(
+            recipeID,
+            body,
+            {safe: true, new : true})
+    }
+
+})
+
+// Update. God mode.
+router.put('/godmode', (req, res, next) => {
+
+    // console.log(req.body)
+    const body = {User: req.body.User}
+
+    updateRecipe({recipeID: req.body._id, body: req.body})
         .then(it => res.status(200).json({res: it}))
         .catch(err => res.status(400).json({err}))
 

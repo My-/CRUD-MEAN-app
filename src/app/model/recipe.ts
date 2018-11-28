@@ -24,7 +24,7 @@ export interface Recipe {
 export const RECIPES: Recipe[] = [
     {
         User: {
-            id: '0',
+            _id: '0',
             userName: 'Jonas',
         },
         title: 'Egg breakfast',
@@ -43,7 +43,7 @@ export const RECIPES: Recipe[] = [
         instructions: 'Man up, take pan and cook an egg :)',
     }, {
         User: {
-            id: '1',
+            _id: '1',
             userName: 'Benas',
         },
         title: 'Simple sandwich',

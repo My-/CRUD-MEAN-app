@@ -154,7 +154,7 @@ router.delete('/', passport.authenticate('jwt', {session: false}), (req, res, ne
     userRecipe({userID: req.user.id, recipeID: req.query.recipeID})
         .then(recipe => deleteRecipe({recipeID: recipe._id}))
         .then(deletedRecipe => deleteRecipeFromUser({userID: deletedRecipe.User, recipeID: deletedRecipe._id}))
-        .then(recipe => res.status(200).json({message: 'Deleted! ', recipe}))
+        .then(recipe => res.status(200).json(recipe))
         .catch(err => res.status(400).json({err}))
 
     /**

@@ -144,7 +144,7 @@ export class RecipeService {
         Delete - DELETE
      */
 
-    deleteFromDB(recipe: Recipe) {
+    deleteFromDB(recipe: Recipe): Observable<Recipe> {
         const link = `http://localhost:3000/recipe`;
         console.log(`DELETE: ${link}`);
 
@@ -154,9 +154,10 @@ export class RecipeService {
             .set('cache-control', 'no-cache');
 
         // delete from db
-        this._http.delete(`${link}?recipeID=${recipe._id}`, {headers}).subscribe();
-        // go to db and reload recipes.( stupid, but it confirms deletion)
-        this.get();
+        return this._http.delete(`${link}?recipeID=${recipe._id}`, {headers}).pipe(
+            map(it => <Recipe>(it as any)),
+            tap(it => this.recipes = this.recipes.filter(e => it._id !== e._id))
+        );
 
     }
 }

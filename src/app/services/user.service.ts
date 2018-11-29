@@ -57,7 +57,7 @@ export class UserService {
         console.log(user);
 
         const headers = new HttpHeaders()
-            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .set('Content-Type', 'application/json')
             .set('Authorization', `Bearer ${LoggedUser.getToken()}`)
             .set('cache-control', 'no-cache');
 

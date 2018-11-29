@@ -54,15 +54,14 @@ export class RecipeService {
     add(userRecipe: Recipe): Observable<any> {
         const link = `http://localhost:3000/recipe`;
         const headers = new HttpHeaders()
-            .set('Content-Type', 'application/x-www-form-urlencoded')
             // .set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
             .set('Authorization', `Bearer ${LoggedUser.getToken()}`)
-            .set('cache-control', 'no-cache');
+            .set('cache-control', 'no-cache')
             .set('Content-Type', 'application/json'); // << OMG << magic fix
 
         console.log(`POST: ${link}`);
 
-        return this._http.post(link, userRecipe)//, {headers})
+        return this._http.post(link, userRecipe, {headers})
             .pipe(
                 tap(val => this._snackBar.open(`Recipe ${(val as any).title} saved`, 'OK', {
                     duration: 2000,

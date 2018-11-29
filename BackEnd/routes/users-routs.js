@@ -51,6 +51,8 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res, next)
 
 // update user details JWT protected
 router.put('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    console.log('user put got:')
+    console.log(req.body)
     const resObj = {}   // response object
     // update user and build response object
     UserModel.findByIdAndUpdate(req.user.id, req.body,)// {safe: true, new : true})

@@ -53,13 +53,15 @@ export class UserService {
     updateDB(user: User): Observable<User> {
         const link = `http://localhost:3000/user`;
         console.log(`PUT: ${link}`);
+        console.log('send:');
+        console.log(user);
 
         const headers = new HttpHeaders()
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .set('Authorization', `Bearer ${LoggedUser.getToken()}`)
             .set('cache-control', 'no-cache');
 
-        return this._http.put('/', user, {headers: headers}).pipe(
+        return this._http.put(link, user, {headers: headers}).pipe(
             tap(val => console.log('got back')),
             tap(val => console.log(val)),
             map(val => <User>(val as any)),

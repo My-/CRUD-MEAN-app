@@ -45,16 +45,19 @@ export class RecipeViewComponent implements OnInit {
 
                 this._snackBar.open('recipe claimed', 'OK', {duration: 2000});
 
-                // if ( user._id !== recipe.User._id ) {
-                //     return new Error(`Fatal. ID' should be the same. ${user._id} !== ${recipe.User}`);
-                // }
+                if ( user._id !== recipe.User._id ) {
+                    return new Error(`Fatal. ID' should be the same. ${user._id} !== ${recipe.User}`);
+                }
 
                 // update user
                 user.recipes.push(recipe);
                 console.log('user');
                 console.log(user);
                 this._userService.updateDB(user).subscribe(
-                    it => this._snackBar.open('recipe added to user', 'OK', {duration: 2000}),
+                    it => {
+                        console.log(it);
+                        this._snackBar.open('recipe added to user', 'OK', {duration: 2000});
+                    },
                     err => console.log(err)
                 );
             },

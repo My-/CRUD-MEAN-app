@@ -5,6 +5,7 @@ import {SideNavService} from '../../services/side-nav.service';
 import {Subscription} from 'rxjs';
 import {LoggedUser} from '../../model/user';
 import {UserService} from '../../services/user.service';
+import {RecipeService} from '../../services/recipe.service';
 
 @Component({
     selector: 'app-header',
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     constructor(private _dialog: MatDialog,
                 private _sideNavService: SideNavService,
                 private _userService: UserService,
+                private _recipeService: RecipeService,
     ) {
         // subscribe to side nav service to be able toggle "brothers" side nav (inner sibling communication)
         this.subSideNav = this._sideNavService.getState().subscribe(state => { this.opened = state; });
@@ -60,4 +62,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
 
+    loadRecipes() {
+        this._recipeService.get().subscribe();
+    }
 }

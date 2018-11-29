@@ -50,10 +50,21 @@ export class UserService {
     }
 
 
-    updateDB(user: User){
-        this._http.put('/')
-    }
+    updateDB(user: User): Observable<User> {
+        const link = `http://localhost:3000/user`;
+        console.log(`PUT: ${link}`);
 
+        const headers = new HttpHeaders()
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .set('Authorization', `Bearer ${LoggedUser.getToken()}`)
+            .set('cache-control', 'no-cache');
+
+        return this._http.put('/', user, {headers: headers}).pipe(
+            tap(val => console.log('got back')),
+            tap(val => console.log(val)),
+            map(val => <User>(val as any)),
+        );
+    }
 
 
     /**
@@ -66,8 +77,7 @@ export class UserService {
             .set('Authorization', `Bearer ${LoggedUser.getToken()}`)
             .set('cache-control', 'no-cache');
 
-        return this._http.get(`$http://localhost:3000/user`,
-            {headers: headers})
+        return this._http.get(`$http://localhost:3000/user`, {headers: headers})
             .pipe(
                 map(val => <User>(val as any).user)
             );
@@ -99,8 +109,13 @@ export class UserService {
             });
         }
 
+        const link = 'http://localhost:3000/auth/localLogin';
+        console.log(`POST: ${link}`);
+        console.log('sending:');
+        console.log(user);
+
         // send post request to express server
-        return this._http.post('http://localhost:3000/auth/localLogin', user)
+        return this._http.post(link, user)
             .pipe(
                 // log response
                 tap(val => console.log(`...got ${JSON.stringify(val, null, 4)}`)),

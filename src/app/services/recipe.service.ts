@@ -60,7 +60,7 @@ export class RecipeService {
 
         console.log(`POST: ${link}`);
 
-        return this._http.post(link, userRecipe) // , {headers})
+        return this._http.post(link, userRecipe)//, {headers})
             .pipe(
                 tap(val => this._snackBar.open(`Recipe ${(val as any).title} saved`, 'OK', {
                     duration: 2000,
@@ -116,7 +116,7 @@ export class RecipeService {
      * Update recipe in God Mode.
      * @param recipe to be updated.
      */
-    updateDB_GM(recipe: Recipe): Observable<string> {
+    updateDB_GM(recipe: Recipe): Observable<Recipe> {
         const link = `http://localhost:3000/recipe/godmode`;
         console.log(`PUT: ${link}`);
         const body: any = recipe;
@@ -133,7 +133,9 @@ export class RecipeService {
         console.log(' sending body:');
         console.log(body);
 
-        this._http.put(`${link}`, body).subscribe(data => this._snackBar.open('recipe claimed'));
+        return this._http.put(`${link}`, body).pipe(
+            map(val => <Recipe>(val as any))
+        );
     }
 
 

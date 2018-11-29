@@ -2,7 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../../services/user.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
+import {
+    MatDialog,
+    MatDialogRef,
+    MAT_DIALOG_DATA,
+    MatSnackBar,
+    MatBottomSheet,
+    MatProgressSpinner,
+} from '@angular/material';
 import {LoggedUser} from '../../../model/user';
 import {LoginComponent} from '../login/login.component';
 
@@ -36,11 +43,13 @@ export class UserLoginComponent implements OnInit {
     });
 
     hide = true;
+    showSpinner = false;
 
     constructor(private _router: Router,
                 private _userService: UserService,
                 private _dialogRef: MatDialogRef<LoginComponent>,
                 private _snackBar: MatSnackBar,
+                private _bottomSheet: MatBottomSheet,
                 ) { }
 
     ngOnInit() { }
@@ -53,6 +62,7 @@ export class UserLoginComponent implements OnInit {
      * Logs user using user service.
      */
     login() {
+
         if (!this.loginForm.valid) {
             console.log(`Invalid Login: ${JSON.stringify(this.loginForm.value)}`);
             return;

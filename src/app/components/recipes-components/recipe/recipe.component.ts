@@ -22,14 +22,16 @@ export class RecipeComponent implements OnInit {
         // subscribe to service recipe variable
         this.subRecipes = this._recipeService.getRecipesFromSubject().subscribe(state => { this.recipes = state; });
 
+
+    }
+
+    ngOnInit() {
         // pull data from database
         this._recipeService.get().subscribe(
             data => this.recipes = data,
             err => console.log('ERROR' + err)
         );
     }
-
-    ngOnInit() { }
 
     searchYummily() {
         this._yummlyService.search(this.searchRecipe)

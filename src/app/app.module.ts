@@ -26,6 +26,7 @@ import {BodyComponent} from './components/body/body.component';
 import {YummlyService} from './services/yummly.service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {SideNavService} from './services/side-nav.service';
+import {MatBottomSheetModule} from '@angular/material';
 
 @NgModule({
     declarations: [

@@ -103,9 +103,6 @@ router.get('/all', (req, res) => {
 // Update. Authenticated.
 router.put('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
 
-    // console.log('in PUT: /recipes/')
-    // console.log(req.body)
-
     userRecipe({userID: req.user.id, recipeID: req.query.recipeID})
         .then(recipeID => updateRecipe({recipeID, body: req.body}))
         .then(it => res.status(200).json({res: it}))
@@ -128,12 +125,12 @@ router.put('/', passport.authenticate('jwt', {session: false}), (req, res, next)
 
 // Update. God mode.
 router.put('/godmode', (req, res, next) => {
-
+    // console.log('Express got: ')
     // console.log(req.body)
     const body = {User: req.body.User}
 
     updateRecipe({recipeID: req.body._id, body: req.body})
-        .then(it => res.status(200).json({res: it}))
+        .then(it => res.status(200).json(it))
         .catch(err => res.status(400).json({err}))
 
     /**

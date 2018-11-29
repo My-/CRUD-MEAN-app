@@ -13,6 +13,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 import {MatCheckboxModule, MatPaginatorModule, MatSortModule, MatToolbarModule} from '@angular/material';
 
@@ -37,6 +39,8 @@ import {MatCheckboxModule, MatPaginatorModule, MatSortModule, MatToolbarModule} 
         MatTabsModule,
         MatSidenavModule,
         MatCheckboxModule,
+        MatProgressSpinnerModule,
+        MatBottomSheetModule,
     ],
     exports: [
         MatTableModule,
@@ -56,6 +60,8 @@ import {MatCheckboxModule, MatPaginatorModule, MatSortModule, MatToolbarModule} 
         MatTabsModule,
         MatSidenavModule,
         MatCheckboxModule,
+        MatProgressSpinnerModule,
+        MatBottomSheetModule,
     ]
 })
 

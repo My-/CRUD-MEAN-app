@@ -1,4 +1,4 @@
-<div class="component">
+<div class="component page-header">
     <p class="text-highlight">header works!</p>
 
 
@@ -29,6 +29,7 @@
            [routerLink]="['/recipe/recipe']"
            routerLinkActive="active"
            matTooltip="Show Recipes"
+           (click)="loadRecipes()"
         >
             <button mat-raised-button
             ><mat-icon>fastfood</mat-icon>

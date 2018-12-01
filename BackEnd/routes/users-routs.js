@@ -10,13 +10,15 @@ require('../config/passport-setup')
 
 // get user comments
 router.get('/comments', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-    UserModel.findById(req.user.id, [`comments`])
+    UserModel.findById(req.user.id, ['comments'])
+        .populate('comments')
         .then(user => {
             if( !user ){
                 throw 'Fatal Error! Here is no user with your token'
             }
             return user
         })
+        .then(user => user.comments)
         .then(val => res.status(200).json(val))
         .catch(err => res.status(400).json({err}))
 })

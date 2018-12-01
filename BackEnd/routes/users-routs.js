@@ -32,12 +32,14 @@ router.get('/recipes', passport.authenticate('jwt', {session: false}), (req, res
             }
             return user
         })
-        .then(val => res.status(200).json(val.recipes))
+        .then(val => res.status(201).json(val.recipes))
         .catch(err => res.status(400).json({err}))
 })
 
 // get user details
 router.get('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    console.log('GET: /user')
+    console.log(req.user)
     UserModel.findById(req.user._id)
         .then(user => {
             if( !user ){
@@ -45,7 +47,7 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res, next)
             }
             return user
         })
-        .then(user => res.status(200).json(user))
+        .then(user => res.status(201).json(user))
         .catch(err => res.status(400).json({err}))
 })
 
@@ -108,7 +110,7 @@ router.post('/', (req, res, next) => {
         // Save user to DB
         .then(newUser => newUser.save())
         // send response
-        .then(savedUser => res.status(200).json(savedUser))
+        .then(savedUser => res.status(201).json(savedUser))
         .catch(err => res.status(400).json({err}))
 })
 

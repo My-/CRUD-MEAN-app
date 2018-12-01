@@ -81,6 +81,7 @@ router.post('/', (req, res) => {
 // Read. get recipe from DataBase by recipe id (parameter: recipeID)
 router.get('/', (req, res) => {
     RecipeModel.findById(req.query.recipeID)
+        .populate('User')
         .then(recipe => {
             if( !recipe ){ throw `Recipe do not exist (${req.query.recipeID})` }
             return recipe

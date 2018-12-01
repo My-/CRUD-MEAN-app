@@ -75,15 +75,18 @@ export class UserService {
      * Get user details from DB by it's ID.
      */
     getUserDetailsDB(): Observable<User> {
-
+        const link = `http://localhost:3000/user`;
         const headers = new HttpHeaders()
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .set('Authorization', `Bearer ${LoggedUser.getToken()}`)
             .set('cache-control', 'no-cache');
 
-        return this._http.get(`$http://localhost:3000/user`, {headers: headers})
+        console.log(`GET: ${link}`);
+
+        return this._http.get(link, {headers})
             .pipe(
-                map(val => <User>(val as any).user)
+                map(val => <User>(val as any)),
+                tap( user => console.log(user)),
             );
     }
 
@@ -138,10 +141,5 @@ export class UserService {
             );
     }
 
-    /**
-     * Gets logged user. If here in no logged user returns null
-     */
-    getLoggedUser(): User {
-        return LoggedUser.get();
-    }
+
 }

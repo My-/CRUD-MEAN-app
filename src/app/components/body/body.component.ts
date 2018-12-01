@@ -3,13 +3,14 @@ import {FormControl} from '@angular/forms';
 import {SideNavService} from '../../services/side-nav.service';
 import {Subscription} from 'rxjs';
 import {UserService} from '../../services/user.service';
+import {LoggedUser} from '../../model/user';
 
 @Component({
     selector: 'app-body',
     templateUrl: './body.component.html',
     styleUrls: ['./body.component.css']
 })
-export class BodyComponent implements OnDestroy {
+export class BodyComponent implements OnInit, OnDestroy {
     opened: boolean;
     subSideNav: Subscription;
     userLogged: boolean;
@@ -20,6 +21,12 @@ export class BodyComponent implements OnDestroy {
                 ) {
         this.subSideNav = this._sideNavService.getState().subscribe(state => { this.opened = state; });
         this.subUserLog = this._userService.getLoginState().subscribe(state => { this.userLogged = state; });
+    }
+
+
+
+    ngOnInit(): void {
+        this.userLogged = !!LoggedUser.get();
     }
 
     ngOnDestroy() {

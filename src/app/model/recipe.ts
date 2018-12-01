@@ -9,7 +9,7 @@ import {User} from './user';
 
 export interface Recipe {
     _id?: string;
-    User?: User;
+    User?: string;
     title: string;
     takesTime?: number;
     pictures?: string[];
@@ -23,10 +23,7 @@ export interface Recipe {
 
 export const RECIPES: Recipe[] = [
     {
-        User: {
-            _id: '0',
-            userName: 'Jonas',
-        },
+        User: '0',
         title: 'Egg breakfast',
         // allergies: [
         //     {name: 'Egg allergy', uri: 'https://en.wikipedia.org/wiki/Egg_allergy'}
@@ -42,10 +39,7 @@ export const RECIPES: Recipe[] = [
         ],
         instructions: 'Man up, take pan and cook an egg :)',
     }, {
-        User: {
-            _id: '1',
-            userName: 'Benas',
-        },
+        User: '1',
         title: 'Simple sandwich',
         // allergies: [],
         takesTime: 5,

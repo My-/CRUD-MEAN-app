@@ -16,6 +16,9 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
 
     @Input() recipe: Recipe;
 
+    showMenu: boolean;
+
+    // subscribe to service variable
     userLogged: boolean;
     subUserLog: Subscription;
 
@@ -34,6 +37,20 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
     ngOnInit() {
         // on refresh keep user logged if he is logged
         this.userLogged = !!LoggedUser.get();
+
+        if ( !!LoggedUser.get() && this.recipe.User) {
+            console.log(`Logged User: ${LoggedUser.get().userName}`);
+            console.log(`Recipe user: ${this.recipe.User}`);
+
+            this.showMenu = LoggedUser.get()._id === this.recipe.User;
+
+            // this._userService.getUserDetailsDB().subscribe(
+            //     user => {
+            //         this.showMenu = LoggedUser.get()._id === user._id;
+            //     },
+            //     err => console.log(err),
+            // );
+        }
     }
 
 

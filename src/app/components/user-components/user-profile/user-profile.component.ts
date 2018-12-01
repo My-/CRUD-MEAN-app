@@ -4,6 +4,7 @@ import {LoggedUser, User} from '../../../model/user';
 import {Subscription} from 'rxjs';
 import {Recipe} from '../../../model/recipe';
 import {RecipeService} from '../../../services/recipe.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-user-profile',
@@ -21,6 +22,7 @@ export class UserProfileComponent implements OnInit {
 
     constructor(private _userService: UserService,
                 private _recipeService: RecipeService,
+                private _router: Router,
                 ) {
         this.subUserLog = this._userService.getUserState().subscribe(state => { this.currentUser = state; });
     }

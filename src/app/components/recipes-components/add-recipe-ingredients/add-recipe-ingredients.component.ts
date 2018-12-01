@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import {NgForm} from '@angular/forms';
 import {FormControl} from '@angular/forms';
@@ -14,16 +14,10 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class AddRecipeIngredientsComponent implements OnInit {
 
-    public ingredients: Ingredient[] = [
-        {name: 'Frozen yogurt', amount: 3},
-        {name: 'Ice cream sandwich', amount: 5},
-        {name: 'Eclair', amount: 7},
-        {name: 'Cupcake', amount: 11},
-        {name: 'Gingerbread', amount: 13},
-    ];
+    @Input() ingredients: Ingredient[];
 
     displayedColumns: string[] = ['name', 'amount'];
-    dataSource = new MatTableDataSource(this.ingredients);
+    dataSource: MatTableDataSource<Ingredient>;
 
     @ViewChild(MatSort) sort: MatSort;
 
@@ -32,6 +26,9 @@ export class AddRecipeIngredientsComponent implements OnInit {
     ingredientsCtrl = new FormControl();
 
     constructor() {
+        if ( !this.ingredients ) { this.ingredients = []; }
+        this.dataSource = new MatTableDataSource(this.ingredients);
+
         this.sortedData = this.ingredients.slice();
 
         // Auto complete
@@ -49,6 +46,7 @@ export class AddRecipeIngredientsComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.dataSource = new MatTableDataSource(this.ingredients);
         this.dataSource.sort = this.sort;
     }
 

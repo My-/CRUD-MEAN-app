@@ -12,8 +12,10 @@ import {Recipe} from '../model/recipe';
 @Injectable()
 
 export class UserService {
+    // Subject variable to check if user is logged in
     private loggedIn = false;
     private subject = new Subject<boolean>();
+    // Subject variable holds logged user
     private user: User;
     private userSubject = new Subject<User>();
 

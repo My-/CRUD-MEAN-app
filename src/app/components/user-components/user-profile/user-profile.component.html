@@ -1,20 +1,26 @@
 <div class="component">
     <p class="text-highlight">user-profile works!</p>
 
+    <!--Show user image-->
     <img *ngIf="currentUser.avatar" src={{currentUser.avatar}}>
 
+    <!--Show user name-->
     <H2 *ngIf="currentUser.userName">Hi {{currentUser.userName}} </H2>
 
+    <!--Show recipe button-->
     <button *ngIf="currentUser.recipes"
             mat-raised-button
+            [routerLink]="['/recipe/recipe']"
             (click)="showRecipes()"
     > Show recipes: {{currentUser.recipes.length}}</button>
 
+    <!--Show comments button-->
     <button *ngIf="currentUser.comments"
             mat-raised-button
             (click)="showComments()"
     > Show comments: {{currentUser.comments.length}}</button>
 
+    <!--Show then user is created if exist-->
     <p *ngIf="currentUser.created">Member since: {{currentUser.created}}</p>
 
 </div>

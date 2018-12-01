@@ -20,7 +20,7 @@ export class RecipeComponent implements OnInit {
                 private _yummlyService: YummlyService,
                 ) {
         // subscribe to service recipe variable
-        this.subRecipes = this._recipeService.getRecipesFromSubject().subscribe(state => { this.recipes = state; });
+        this.subRecipes = this._recipeService.getRecipesArrFromSubject().subscribe(state => { this.recipes = state; });
 
 
     }

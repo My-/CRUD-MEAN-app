@@ -45,6 +45,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ``
 
+jwt token last only 1 h
+
+
 
 # References:
 - (Angular + pasport)https://www.youtube.com/watch?v=IlpU1z3cvSQ
@@ -63,3 +66,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - (remove mongo document references) https://stackoverflow.com/a/11905116/5322506
 - (angular inter component comunication) http://jasonwatmore.com/post/2016/12/01/angular-2-communicating-between-components-with-observable-subject
 - (multy subscribers to Observables) https://stackoverflow.com/a/43644258/5322506
+- (Send data through routing paths in Angular) https://stackoverflow.com/questions/44864303/send-data-through-routing-paths-in-angular
+- ()

@@ -20,7 +20,7 @@
                    type="text"
                    minlength="3"
                    name="title"
-                   ngModel
+                   ngModel={{recipe.title}}
                    required
                    #title="ngModel"
             />
@@ -34,7 +34,7 @@
                       placeholder="Recipe"
                       rows="5"
                       name="instructions"
-                      ngModel
+                      ngModel={{recipe.instructions}}
                       required
                       #instructions="ngModel"
             ></textarea>
@@ -45,7 +45,7 @@
 
 
         <!--Component responsible for ingredients-->
-        <app-add-recipe-ingredients></app-add-recipe-ingredients>
+        <app-add-recipe-ingredients [ingredients]="recipe.ingredients"></app-add-recipe-ingredients>
 
         <!--TODO: -->
 

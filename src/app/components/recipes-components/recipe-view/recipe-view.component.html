@@ -64,11 +64,11 @@ style="background-color: dimgray">
 
         </mat-card-content>
 
-        <mat-card-actions>
-            <!--TODO: maket them work-->
+        <mat-card-actions *ngIf="userLogged">
+            <!--TODO: make them work-->
             <button mat-button (click)="deleteRecipe()">Delete</button>
-            <button mat-button>Edit</button>
-            <button mat-button>Add comment</button>
+            <button mat-button (click)="editRecipe()">Edit</button>
+            <button mat-button (click)="addComment()">Add comment</button>
 
         </mat-card-actions>
 

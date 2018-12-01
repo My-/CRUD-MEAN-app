@@ -9,8 +9,18 @@ import {LoggedUser} from '../model/user';
 
 @Injectable()
 export class RecipeService {
-    private recipes: Recipe[];
-    private subject = new Subject<Recipe[]>();
+
+    // recipes array subject
+    private subjectRecipesArr = new Subject<Recipe[]>();
+    private recipesArr: Recipe[];
+
+    // recipe subject
+    private subjectRecipe = new Subject<Recipe>();
+    private recipe: Recipe = {
+        title: 'Recipe Title',
+        instructions: 'Enter your recipe here',
+    };
+
 
     constructor(private _http: HttpClient,
                 private _snackBar: MatSnackBar,
@@ -18,10 +28,28 @@ export class RecipeService {
 
     }
 
-
-    getRecipesFromSubject(): Observable<Recipe[]> {
-        return this.subject.asObservable();
+    /**
+     * Get recipe array instance
+     */
+    getRecipesArrFromSubject(): Observable<Recipe[]> {
+        return this.subjectRecipesArr.asObservable();
     }
+
+    /**
+     * Get single recipe instance
+     */
+    getOneRecipeSubject(): Observable<Recipe> {
+        return this.subjectRecipe.asObservable();
+    }
+
+    /**
+     * Ser single recipe instance to
+     * @param recipe instance of recipe
+     */
+    setRecipeSubjectTo(recipe: Recipe): void {
+        this.recipe = recipe;
+    }
+
 
     /*
     Create - POST
@@ -54,7 +82,7 @@ export class RecipeService {
     add(userRecipe: Recipe): Observable<any> {
         const link = `http://localhost:3000/recipe`;
         const headers = new HttpHeaders()
-            // .set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        // .set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
             .set('Authorization', `Bearer ${LoggedUser.getToken()}`)
             .set('cache-control', 'no-cache')
             .set('Content-Type', 'application/json'); // << OMG << magic fix
@@ -88,8 +116,8 @@ export class RecipeService {
 
         return this._http.get(link, {headers}).pipe(
             map(it => <Recipe[]>it),
-            tap(it => this.recipes = it),
-            tap(it => this.subject.next(this.recipes)),
+            tap(it => this.recipesArr = it),
+            tap(it => this.subjectRecipesArr.next(this.recipesArr)),
         );
     }
 
@@ -103,8 +131,8 @@ export class RecipeService {
             map(data => <Recipe[]>data),
             tap(val => console.log(`   ...got from server:`)),
             tap(data => console.log(data)),
-            tap(it => this.recipes = it),
-            tap(it => this.subject.next(this.recipes)),
+            tap(it => this.recipesArr = it),
+            tap(it => this.subjectRecipesArr.next(this.recipesArr)),
         );
     }
 
@@ -156,8 +184,23 @@ export class RecipeService {
         // delete from db
         return this._http.delete(`${link}?recipeID=${recipe._id}`, {headers}).pipe(
             map(it => <Recipe>(it as any)),
-            tap(it => this.recipes = this.recipes.filter(e => it._id !== e._id))
+            tap(it => this.recipesArr = this.recipesArr.filter(e => it._id !== e._id))
         );
 
+    }
+
+    /**
+     * Get one recipe by id from DB.
+     * @param id recipe id.
+     */
+    getOne(id: string): Observable<Recipe> {
+        const link = `http://localhost:3000/recipe?recipeID=${id}`;
+        console.log(`GET: ${link}`);
+
+        return this._http.get(link).pipe(
+            map(val => <Recipe>(val as any)),
+            tap(it => console.log(it)),
+            tap(it => this.setRecipeSubjectTo(it)),
+        );
     }
 }

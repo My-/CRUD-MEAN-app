@@ -11,7 +11,7 @@ const UserSchema = require('./user-schema')
 const RecipeSchema = new Schema({
     User: {
         type: ObjectId,
-        ref: "UserSchema",
+        ref: "User",
         default: null,
     },
     title: {

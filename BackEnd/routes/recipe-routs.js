@@ -81,7 +81,7 @@ router.post('/', (req, res) => {
 // Read. get recipe from DataBase by recipe id (parameter: recipeID)
 router.get('/', (req, res) => {
     RecipeModel.findById(req.query.recipeID)
-        .populate('User')
+        .populate(['User', 'comments'])
         .then(recipe => {
             if( !recipe ){ throw `Recipe do not exist (${req.query.recipeID})` }
             return recipe
@@ -93,6 +93,7 @@ router.get('/', (req, res) => {
 // get all recipes
 router.get('/all', (req, res) => {
     RecipeModel.find()
+        .populate(['User', 'comments'])
         .then(data => {
             if( !data ){ throw 'No recipes are in DB.' }
             return data

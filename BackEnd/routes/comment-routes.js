@@ -102,7 +102,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next
 router.get('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     new Promise((resolve, reject) => {
         if( !req.query.commentID ){ reject('Missing commentID parameter.') }
-        else{ resolve( CommentModel.findById(req.query.commentID) )}
+        else{ resolve( CommentModel.findById(req.query.commentID).populate('User') )}
     })
         .then(val => res.status(200).json(val))
         .catch(err => res.status(400).json({err}))

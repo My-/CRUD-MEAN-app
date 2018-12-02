@@ -124,7 +124,7 @@ export class RecipeService {
     /**
      * Get all recipes from DataBase
      */
-    get(): Observable<Recipe[]> {
+    getAll(): Observable<Recipe[]> {
         console.log(`${'\nGET: http://localhost:3000/recipe/all'}`);
 
         return this._http.get('http://localhost:3000/recipe/all').pipe(

@@ -15,6 +15,7 @@ import {Subscription} from 'rxjs';
 export class RecipeViewComponent implements OnInit, OnDestroy {
 
     @Input() recipe: Recipe;
+    comments: Component[];
 
     showMenu: boolean;
 
@@ -31,25 +32,31 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
     ) {
         // subscribe to user logged variable
         this.subUserLog = this._userService.getLoginState().subscribe(state => { this.userLogged = state; });
+
+        // load comments
+        // this._userService.getComments().subscribe(
+        //     comments => {
+        //         comments.forEach(it => console.log(it));
+        //     },
+        //     err => console.log(err),
+        // );
+
     }
 
 
     ngOnInit() {
-        // on refresh keep user logged if he is logged
+        // on refresh keep user logged if he is logged in
         this.userLogged = !!LoggedUser.get();
 
-        if ( !!LoggedUser.get() && this.recipe.User) {
-            console.log(`Logged User: ${LoggedUser.get().userName}`);
-            console.log(`Recipe user: ${this.recipe.User}`);
-
+        // check recipe user id against logged user id.
+        if ( this.userLogged && this.recipe.User) {
             this.showMenu = LoggedUser.get()._id === this.recipe.User;
+        }
 
-            // this._userService.getUserDetailsDB().subscribe(
-            //     user => {
-            //         this.showMenu = LoggedUser.get()._id === user._id;
-            //     },
-            //     err => console.log(err),
-            // );
+        // load comments
+        if ( !this.recipe.comments && this.recipe.comments.length > 0 ) {
+            console.log('Comments');
+            console.log(this.recipe.comments);
         }
     }
 
@@ -82,5 +89,9 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         // unsubscribe to ensure no memory leaks
         this.subUserLog.unsubscribe();
+    }
+
+    getComment(comment: Comment): string {
+        return comment.text;
     }
 }

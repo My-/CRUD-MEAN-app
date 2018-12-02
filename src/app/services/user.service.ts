@@ -141,5 +141,24 @@ export class UserService {
             );
     }
 
+    /**
+     * Gets logged user all comments.
+     */
+    getComments(): Observable<Comment[]> {
+        const link = `http://localhost:3000/user/comments`;
+        const headers = new HttpHeaders()
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .set('Authorization', `Bearer ${LoggedUser.getToken()}`)
+            .set('cache-control', 'no-cache');
+
+        console.log(`GET: ${link}`);
+
+        return this._http.get(link, {headers}).pipe(
+            map(data => <Comment[]>(data  as any)),
+            tap(comments => console.log(comments))
+        );
+
+    }
+
 
 }

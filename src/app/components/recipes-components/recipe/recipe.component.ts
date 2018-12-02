@@ -27,7 +27,7 @@ export class RecipeComponent implements OnInit {
 
     ngOnInit() {
         // pull data from database
-        this._recipeService.get().subscribe(
+        this._recipeService.getAll().subscribe(
             data => this.recipes = data,
             err => console.log('ERROR' + err)
         );

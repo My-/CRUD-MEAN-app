@@ -53,6 +53,22 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res, next)
         .catch(err => res.status(400).json({err}))
 })
 
+// get user by his id (no auth)
+router.get('/user', (req, res) => {
+    console.log(`GET: /user/user?userID=${req.query.userID}`)
+
+    UserModel.findById(req.query.userID)
+        .populate(['comments', 'recipes'])
+        .then(user => {
+            if( !user ){
+                throw 'Fatal Error! Here is no user with your token'
+            }
+            return user
+        })
+        .then(user => res.status(201).json(user))
+        .catch(err => res.status(400).json({err}))
+})
+
 // update user details JWT protected
 router.put('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     console.log('user put got:')

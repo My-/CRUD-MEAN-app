@@ -160,5 +160,49 @@ export class UserService {
 
     }
 
+    createComment(text: string, recipeID?: string, commentID?: string): Observable<Comment> {
+        const link = `http://localhost:3000/comment`;
+        const headers = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .set('Authorization', `Bearer ${LoggedUser.getToken()}`)
+            .set('cache-control', 'no-cache');
 
+        console.log(`POST: ${link}`);
+
+        let body = {};
+        if ( recipeID ) { body = {recipeID}; }
+        else if ( commentID ) { body = {commentID}; }
+
+        return this._http.post(link, body, {headers}).pipe(
+            map(data => <Comment>(data as any)),
+        );
+    }
+
+    updateComment(commentID: string, text: string): Observable<Comment> {
+        const link = `http://localhost:3000/comment?commentID=${commentID}`;
+        const headers = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .set('Authorization', `Bearer ${LoggedUser.getToken()}`)
+            .set('cache-control', 'no-cache');
+
+        console.log(`PUT: ${link}`);
+
+        return this._http.put(link, {text}, {headers}).pipe(
+            map(data => <Comment>(data as any)),
+        );
+    }
+
+    /**
+     * Get user details from DB.
+     * @param userID user id.
+     */
+    getUser(userID: string): Observable<User> {
+        const link = `http://localhost:3000/user/user?userID=${userID}`;
+
+        console.log(`GET: ${link}`);
+
+        return this._http.get(link).pipe(
+            map(data => <User>(data as any)),
+        );
+    }
 }

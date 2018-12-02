@@ -2,10 +2,10 @@ import {User} from './user';
 
 
 export interface Comment {
-    _id: string;
+    _id?: string;
     User?: User;
     parentType?: string;
-    ParentID?: string;
+    Parent?: string;
     text?: string;
     comments?: Comment[];
     created?: string;

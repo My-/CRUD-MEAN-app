@@ -63,6 +63,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
     loadRecipes() {
-        this._recipeService.get().subscribe();
+        this._recipeService.getAll().subscribe();
     }
 }

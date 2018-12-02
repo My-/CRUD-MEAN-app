@@ -76,7 +76,9 @@ style="background-color: dimgray">
                     </mat-expansion-panel-header>
 
                     <div *ngFor="let comment of recipe.comments">
-                        <h3>{{getComment(comment)}}</h3>
+                        <app-comment [comment]="comment"
+                                     (commentEvent)="saveComment($event)"
+                        ></app-comment>
                         <br>
                     </div>
 
@@ -85,11 +87,11 @@ style="background-color: dimgray">
 
         </mat-card-content>
 
-        <mat-card-actions *ngIf="showMenu">
+        <mat-card-actions>
             <!--TODO: make them work-->
-            <button mat-button (click)="deleteRecipe()">Delete</button>
-            <button mat-button (click)="editRecipe()">Edit</button>
-            <button mat-button (click)="addComment()">Add comment</button>
+            <button *ngIf="isRecipeOwner" mat-button (click)="deleteRecipe()">Delete</button>
+            <button *ngIf="isRecipeOwner" mat-button (click)="editRecipe()">Edit</button>
+            <button *ngIf="userLogged" mat-button (click)="addComment()">Add comment</button>
 
         </mat-card-actions>
 

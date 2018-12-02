@@ -1,5 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Recipe} from '../../../model/recipe';
+import {Comment} from '../../../model/comment';
 import {RecipeService} from '../../../services/recipe.service';
 import {UserService} from '../../../services/user.service';
 import {LoggedUser, User} from '../../../model/user';
@@ -17,7 +18,7 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
     @Input() recipe: Recipe;
     comments: Component[];
 
-    showMenu: boolean;
+    isRecipeOwner: boolean;
 
     // subscribe to service variable
     userLogged: boolean;
@@ -50,7 +51,7 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
 
         // check recipe user id against logged user id.
         if ( this.userLogged && this.recipe.User) {
-            this.showMenu = LoggedUser.get()._id === this.recipe.User;
+            this.isRecipeOwner = LoggedUser.get()._id === this.recipe.User;
         }
 
         // load comments
@@ -93,5 +94,33 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
 
     getComment(comment: Comment): string {
         return comment.text;
+    }
+
+    isUserComment(comment: Comment): boolean {
+        return this.userLogged && <any>LoggedUser.get()._id === (<any>comment).User;
+    }
+
+    /**
+     * Save / Update recipe comment
+     * @param comment should be updated/created
+     */
+    saveComment(comment: Comment) {
+        console.log(comment);
+
+        if ( comment._id ) { // if comment has id update it..
+            this._userService.updateComment(comment._id, comment.text).subscribe(
+                val => console.log(val),
+                err => console.log(err),
+            );
+        }
+        else { // ..else create new
+            const recipeID = this.recipe._id;
+            this._userService.createComment(comment.text, recipeID).subscribe(
+                val => console.log(val),
+                err => console.log(err),
+            );
+        }
+
+
     }
 }

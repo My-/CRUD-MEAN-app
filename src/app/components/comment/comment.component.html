@@ -1,0 +1,58 @@
+<div class="component page-footer" >
+    <p class="text-highlight">comment</p>
+
+    <mat-card class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar
+                 class="example-header-image"
+                 style="background-image: url('http://www.disciplemagazine.com/images/photos/183/Article_Photos/Immaturity.jpg')"
+            ></div>
+            <mat-card-title *ngIf="user.userName">{{user.userName}}</mat-card-title>
+            <mat-card-subtitle>Comment</mat-card-subtitle>
+        </mat-card-header>
+
+
+        <mat-card-content>
+
+            <p *ngIf="!edit">{{comment.text}}</p>
+
+            <!--comment form-->
+            <form *ngIf="edit"
+                  #commentForm="ngForm"
+                  (submit)="onSubmitComment(commentForm)"
+                  class="example-form"
+            >
+                <mat-form-field class="example-full-width">
+                        <textarea matInput
+                                  placeholder="Comment"
+                                  rows="5"
+                                  name="commentText"
+                                  ngModel={{comment.text}}
+                                  required
+                                  #commentText="ngModel"
+                        ></textarea>
+                </mat-form-field>
+
+                <button *ngIf="edit"
+                        mat-raised-button
+                        color="accent"
+                        type="submit">Save</button>
+            </form>
+
+
+        </mat-card-content>
+        <mat-card-actions>
+
+            <button *ngIf="edit"
+                    mat-raised-button
+                    (click)="onCancel()">Cancel</button>
+
+            <button *ngIf="!edit"
+                    mat-raised-button
+                    (click)="onEdit()">Edit</button>
+
+        </mat-card-actions>
+    </mat-card>
+
+
+</div>

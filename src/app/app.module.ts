@@ -27,6 +27,7 @@ import {YummlyService} from './services/yummly.service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {SideNavService} from './services/side-nav.service';
 import {MatBottomSheetModule} from '@angular/material';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import {MatBottomSheetModule} from '@angular/material';
         LoginComponent,
         HeaderComponent,
         BodyComponent,
+        CommentComponent,
     ],
     imports: [
         HttpClientModule,

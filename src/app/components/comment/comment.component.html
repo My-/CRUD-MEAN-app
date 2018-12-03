@@ -47,7 +47,7 @@
                     mat-raised-button
                     (click)="onCancel()">Cancel</button>
 
-            <button *ngIf="!edit"
+            <button *ngIf="!edit && editable"
                     mat-raised-button
                     (click)="onEdit()">Edit</button>
 

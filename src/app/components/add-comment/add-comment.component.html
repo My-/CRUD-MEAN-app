@@ -1,0 +1,22 @@
+<div class="component page-footer" >
+    <p class="text-highlight">add-comment</p>
+
+
+    <h1 mat-dialog-title>Hi {{data.User.userName}}</h1>
+    <div mat-dialog-content>
+        <p>Enter yours comment here</p>
+        <mat-form-field>
+            <textarea matInput
+                      placeholder="Comment"
+                      rows="5"
+                      [(ngModel)]="data.text"></textarea>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">No Thanks</button>
+        <button mat-button [mat-dialog-close]="data.text" cdkFocusInitial>Ok</button>
+    </div>
+
+
+
+</div>

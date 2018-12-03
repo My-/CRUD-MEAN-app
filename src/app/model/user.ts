@@ -25,6 +25,12 @@ export enum UserGender {
     OTHER = 'other',
 }
 
+export const ANONYMOUS: User = {
+    userName: 'Anonymous',
+    loginMethod: 'none',
+    avatar: 'https://www.no-gods-no-masters.com/images_designs/anonymous-d001008122317.png',
+};
+
 /**
  * Logged class singleton class
  */

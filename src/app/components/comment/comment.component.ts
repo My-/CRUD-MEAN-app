@@ -29,6 +29,10 @@ export class CommentComponent implements OnInit {
             user => this.user = user,
             err => console.log(err),
         );
+
+        if ( !!LoggedUser.get() ) {
+            this.editable = userID === LoggedUser.get()._id;
+        }
     }
 
     onEdit(): void {

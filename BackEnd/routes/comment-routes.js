@@ -9,6 +9,7 @@ const RecipeModel = require('../models/recipe-model')
 
 // Create comment
 router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    console.log(`POST: /comment/ `)
     // Create promise
     new Promise((resolve, reject) => {
         // check for any missing parameters

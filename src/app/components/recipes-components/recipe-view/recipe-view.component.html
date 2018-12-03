@@ -6,7 +6,10 @@ style="background-color: dimgray">
 
         <!--Tittle & short description-->
         <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
+            <div mat-card-avatar
+                 class="example-header-image"
+            ></div> <!--style="background-image: url('{{recipe.User.avatar}}')"-->
+            
             <mat-card-title>{{recipe.title}}</mat-card-title>
             <mat-card-subtitle>{{recipe.instructions.substring(0, 15)}}...</mat-card-subtitle>
         </mat-card-header>

@@ -7,7 +7,7 @@ import {LoggedUser, User} from '../model/user';
 import {Observable, Observer, Subject, throwError} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material';
-import {Recipe} from '../model/recipe';
+import {Comment} from '../model/comment';
 
 @Injectable()
 
@@ -169,11 +169,12 @@ export class UserService {
 
         console.log(`POST: ${link}`);
 
-        let body = {};
-        if ( recipeID ) { body = {recipeID}; }
-        else if ( commentID ) { body = {commentID}; }
+        const body: any = {text};
+        if ( recipeID ) { body.recipeID = recipeID; }
+        else if ( commentID ) { body.commentID = commentID; }
 
         return this._http.post(link, body, {headers}).pipe(
+            tap(it => console.log(it)),
             map(data => <Comment>(data as any)),
         );
     }

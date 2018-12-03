@@ -4,9 +4,12 @@ import {Comment} from '../../../model/comment';
 import {RecipeService} from '../../../services/recipe.service';
 import {UserService} from '../../../services/user.service';
 import {LoggedUser, User} from '../../../model/user';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {ANONYMOUS} from '../../../model/user';
+import {LoginComponent} from '../../user-components/login/login.component';
+import {AddCommentComponent} from '../../add-comment/add-comment.component';
 
 @Component({
     selector: 'app-recipe-view',
@@ -16,7 +19,7 @@ import {Subscription} from 'rxjs';
 export class RecipeViewComponent implements OnInit, OnDestroy {
 
     @Input() recipe: Recipe;
-    comments: Component[];
+    comments: Comment[];
 
     isRecipeOwner: boolean;
 
@@ -30,17 +33,13 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
                 private _userService: UserService,
                 private _snackBar: MatSnackBar,
                 private _router: Router,
+                private _dialog: MatDialog,
     ) {
         // subscribe to user logged variable
-        this.subUserLog = this._userService.getLoginState().subscribe(state => { this.userLogged = state; });
+        this.subUserLog = this._userService.getLoginState().subscribe(
+            state => { this.userLogged = state; }
+        );
 
-        // load comments
-        // this._userService.getComments().subscribe(
-        //     comments => {
-        //         comments.forEach(it => console.log(it));
-        //     },
-        //     err => console.log(err),
-        // );
 
     }
 
@@ -49,10 +48,29 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
         // on refresh keep user logged if he is logged in
         this.userLogged = !!LoggedUser.get();
 
-        // check recipe user id against logged user id.
-        if ( this.userLogged && this.recipe.User) {
-            this.isRecipeOwner = LoggedUser.get()._id === this.recipe.User;
+        if ( !this.recipe.User ) {
+            this.recipe.User = ANONYMOUS;
         }
+
+        // populate recipe user if not populated
+        if ( !this.recipe.User._id ) {
+            const userID: any = this.recipe.User;
+            this._userService.getUser(userID).subscribe(
+                val => this.recipe.User = val,
+                err => console.log(err),
+                () => {
+                    // check recipe user id against logged user id.
+                    if ( this.userLogged && this.recipe.User) {
+                        this.isRecipeOwner = LoggedUser.get()._id === this.recipe.User._id;
+                        console.log('recipe owner: ' + this.isRecipeOwner);
+                        console.log(LoggedUser.get()._id);
+                        console.log(this.recipe.User._id);
+                    }
+                }
+            );
+        }
+
+
 
         // load comments
         if ( !this.recipe.comments && this.recipe.comments.length > 0 ) {
@@ -75,9 +93,30 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
         );
     }
 
-
+    /**
+     * Adds comment to recipe
+     */
     addComment() {
-        // TODO: popup create comment form >> save it >> display it
+        // let text;
+        const dialogRef = this._dialog.open(AddCommentComponent, {
+            // width: '250px',              // popup dialog width
+            data: {
+                User: LoggedUser.get(),
+            },
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            const recipeID = this.recipe._id;
+            this._userService.createComment(result, recipeID).subscribe(
+                data => {
+                    console.log(data);
+                    // this.recipe.comments.push(data);
+                },
+                err => console.log(err),
+                () => console.log(this.recipe.comments)
+            );
+        });
     }
 
     /**

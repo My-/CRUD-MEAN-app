@@ -28,6 +28,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {SideNavService} from './services/side-nav.service';
 import {MatBottomSheetModule} from '@angular/material';
 import { CommentComponent } from './components/comment/comment.component';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import { CommentComponent } from './components/comment/comment.component';
         HeaderComponent,
         BodyComponent,
         CommentComponent,
+        AddCommentComponent,
     ],
     imports: [
         HttpClientModule,
@@ -58,6 +60,7 @@ import { CommentComponent } from './components/comment/comment.component';
     ],
     entryComponents: [
         LoginComponent,
+        AddCommentComponent,
     ],
     providers: [
         RecipeService,

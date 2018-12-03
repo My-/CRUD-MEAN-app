@@ -9,6 +9,7 @@ const RecipeModel = require('../models/recipe-model')
 
 // Create comment
 router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    console.log(`POST: /comment/ `)
     // Create promise
     new Promise((resolve, reject) => {
         // check for any missing parameters
@@ -60,7 +61,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next
 
     /**
      * Records comment id to Recipe document.
-     * Comment on recipe.
+     * Comment on instructions.
      * @param comment
      * @return {Promise}
      */
@@ -102,7 +103,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next
 router.get('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     new Promise((resolve, reject) => {
         if( !req.query.commentID ){ reject('Missing commentID parameter.') }
-        else{ resolve( CommentModel.findById(req.query.commentID) )}
+        else{ resolve( CommentModel.findById(req.query.commentID).populate('User') )}
     })
         .then(val => res.status(200).json(val))
         .catch(err => res.status(400).json({err}))

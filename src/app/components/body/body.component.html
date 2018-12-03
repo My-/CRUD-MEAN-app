@@ -1,0 +1,43 @@
+<div class="component h600">
+    <p class="text-highlight">body</p>
+
+    <mat-sidenav-container>
+
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" >
+        <!--Sidenav content-->
+
+        <button mat-raised-button
+                (click)="logOut()"
+                matTooltip="Logout"
+        ><mat-icon>eject</mat-icon>
+        </button>
+
+        <app-user-profile></app-user-profile>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <!--<p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>-->
+        <!--<p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>-->
+
+
+
+
+        <!--RouteLink components will be loaded there-->
+        <div class="continer-fluid h600">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+
+    </mat-sidenav-content>
+
+
+    </mat-sidenav-container>
+
+    <!--</mat-drawer-container>-->
+
+
+</div>

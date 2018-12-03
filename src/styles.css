@@ -5,9 +5,13 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.h600 {
+    min-height: 600px;
+}
+
 .component {
-    border:3px solid black;
-    color: #2ccd51;
+    /*border:3px solid black;*/
+    /*color: #2ccd51;*/
 }
 
 /* @ref: http://jsfiddle.net/CNJZK/5/ */
@@ -18,6 +22,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     line-height: 1.7;
     border-radius: 3px;
     display:inline;
+
+    display: none;
 }
 
 .view-80 {
@@ -25,4 +31,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 500px;
 }
 
+.h500max{
+    max-height: 500px;
+}
 

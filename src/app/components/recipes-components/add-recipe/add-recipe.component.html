@@ -1,0 +1,66 @@
+<div class="component">
+<p class="text-highlight">add-recipe</p>
+    <button
+        mat-raised-button
+        (click)="onLoadPredifinedData()">upload def recipes Recipe</button>
+
+    <!--Component responsible for image uploading-->
+    <app-add-recipe-image></app-add-recipe-image>
+
+
+    <form class="example-form"
+          (submit)="onAddRecipe(recipeForm)"
+          #recipeForm="ngForm"
+    >
+
+        <!--Recipe title-->
+        <mat-form-field class="example-full-width">
+            <input matInput
+                   placeholder="Recipe title"
+                   type="text"
+                   minlength="3"
+                   name="title"
+                   ngModel={{recipe.title}}
+                   required
+                   #title="ngModel"
+            />
+            <mat-error *ngIf="title.invalid">Please enter a recipe title.</mat-error>
+
+        </mat-form-field>
+
+        <!--Recipe-->
+        <mat-form-field class="example-full-width">
+            <textarea matInput
+                      placeholder="Recipe"
+                      rows="5"
+                      name="instructions"
+                      ngModel={{recipe.instructions}}
+                      required
+                      #instructions="ngModel"
+            ></textarea>
+            <mat-error *ngIf="instructions.invalid">Please enter a recipe.</mat-error>
+        </mat-form-field>
+
+
+
+
+        <!--Component responsible for ingredients-->
+        <app-add-recipe-ingredients [ingredients]="recipe.ingredients"></app-add-recipe-ingredients>
+
+        <!--TODO: -->
+
+        <!--allergies?? should I include in ingredient component-->
+
+        <!--Takes time-->
+
+        <!--get user id-->
+
+        <!--Submit button-->
+        <button
+            mat-raised-button
+            color="accent"
+            type="submit">Save Recipe</button>
+    </form>
+
+
+</div>

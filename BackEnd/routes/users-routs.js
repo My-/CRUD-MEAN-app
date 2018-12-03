@@ -10,13 +10,15 @@ require('../config/passport-setup')
 
 // get user comments
 router.get('/comments', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-    UserModel.findById(req.user.id, [`comments`])
+    UserModel.findById(req.user.id, ['comments'])
+        .populate('comments')
         .then(user => {
             if( !user ){
                 throw 'Fatal Error! Here is no user with your token'
             }
             return user
         })
+        .then(user => user.comments)
         .then(val => res.status(200).json(val))
         .catch(err => res.status(400).json({err}))
 })
@@ -32,12 +34,14 @@ router.get('/recipes', passport.authenticate('jwt', {session: false}), (req, res
             }
             return user
         })
-        .then(val => res.status(200).json(val.recipes))
+        .then(val => res.status(201).json(val.recipes))
         .catch(err => res.status(400).json({err}))
 })
 
 // get user details
 router.get('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    console.log('GET: /user')
+    console.log(req.user)
     UserModel.findById(req.user._id)
         .then(user => {
             if( !user ){
@@ -45,12 +49,30 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res, next)
             }
             return user
         })
-        .then(user => res.status(200).json(user))
+        .then(user => res.status(201).json(user))
+        .catch(err => res.status(400).json({err}))
+})
+
+// get user by his id (no auth)
+router.get('/user', (req, res) => {
+    console.log(`GET: /user/user?userID=${req.query.userID}`)
+
+    UserModel.findById(req.query.userID)
+        .populate(['comments', 'recipes'])
+        .then(user => {
+            if( !user ){
+                throw 'Fatal Error! Here is no user with your token'
+            }
+            return user
+        })
+        .then(user => res.status(201).json(user))
         .catch(err => res.status(400).json({err}))
 })
 
 // update user details JWT protected
 router.put('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    console.log('user put got:')
+    console.log(req.body)
     const resObj = {}   // response object
     // update user and build response object
     UserModel.findByIdAndUpdate(req.user.id, req.body,)// {safe: true, new : true})
@@ -106,7 +128,7 @@ router.post('/', (req, res, next) => {
         // Save user to DB
         .then(newUser => newUser.save())
         // send response
-        .then(savedUser => res.status(200).json(savedUser))
+        .then(savedUser => res.status(201).json(savedUser))
         .catch(err => res.status(400).json({err}))
 })
 

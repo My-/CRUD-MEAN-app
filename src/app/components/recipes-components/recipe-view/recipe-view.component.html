@@ -1,0 +1,103 @@
+<div class="component"
+style="background-color: dimgray">
+    <p class="text-highlight">recipe-view component</p>
+
+    <mat-card class="example-card">
+
+        <!--Tittle & short description-->
+        <mat-card-header>
+            <div mat-card-avatar
+                 class="example-header-image"
+            ></div> <!--style="background-image: url('{{recipe.User.avatar}}')"-->
+            
+            <mat-card-title>{{recipe.title}}</mat-card-title>
+            <mat-card-subtitle>{{recipe.instructions.substring(0, 15)}}...</mat-card-subtitle>
+        </mat-card-header>
+
+        <!--Picture-->
+        <img class="h500max"
+             mat-card-image
+             src="{{recipe.pictures[0]}}"
+             alt={{recipe.title}}>
+
+        <!--Recipe & ingredients-->
+        <mat-card-content>
+            <!--Recipe-->
+            <p>{{recipe.instructions}}</p>
+
+            <!--Collapse/Expandable-->
+            <mat-accordion class="example-headers-align">
+
+                <!--Ingredients-->
+                <mat-expansion-panel>
+
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Ingredients
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Ingredients for this recipe
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <!--Ingredients table-->
+                    <table mat-table
+                       [dataSource]="recipe.ingredients"
+                       class="mat-elevation-z8 example-full-width">
+
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+
+                        <!-- Amount Column -->
+                        <ng-container matColumnDef="amount">
+                            <th mat-header-cell *matHeaderCellDef> Grams </th>
+                            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Name </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                </mat-expansion-panel>
+
+                <!--Comments-->
+                <mat-expansion-panel *ngIf="recipe.comments.length > 0">
+
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Comments
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Comments for this recipe
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <div *ngFor="let comment of recipe.comments">
+                        <app-comment [comment]="comment"
+                                     (commentEvent)="saveComment($event)"
+                        ></app-comment>
+                        <br>
+                    </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+            <!--TODO: make them work-->
+            <button *ngIf="isRecipeOwner" mat-button (click)="deleteRecipe()">Delete</button>
+            <button *ngIf="isRecipeOwner" mat-button (click)="editRecipe()">Edit</button>
+            <button *ngIf="userLogged" mat-button (click)="addComment()">Add comment</button>
+
+        </mat-card-actions>
+
+    </mat-card>
+
+</div>
